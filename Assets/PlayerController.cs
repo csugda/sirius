@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
     private Rigidbody2D player;
-    public float moveForce, decelModifier, maxSpeed;
+    public float moveForce, jumpPower, decelModifier, maxSpeed;
 	// Use this for initialization
 	void Start () {
         player = this.gameObject.GetComponent<Rigidbody2D>();
@@ -20,6 +20,11 @@ public class PlayerController : MonoBehaviour {
         if (player.velocity.x != 0)
         {
             player.velocity = (Vector2.Lerp(player.velocity, new Vector2(0, player.velocity.y), decelModifier)); 
+        }
+
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            player.AddForce(new Vector2(0, jumpPower));
         }
     }
 }
