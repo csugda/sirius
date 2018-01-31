@@ -14,7 +14,10 @@ public class PlayerController1 : MonoBehaviour {
 	}
 
     public float speed;
+    public float gravity;
+    public float jumpPower;
     private bool down = false;
+    private bool canDoubleJump  = true;
 	// Update is called once per frame
 	void FixedUpdate () {
 		if (Input.GetKey(KeyCode.LeftArrow))
@@ -32,13 +35,17 @@ public class PlayerController1 : MonoBehaviour {
 
         if (!down)
         {
-            velocity.y -= 10 * Time.deltaTime;
+            velocity.y -= gravity * Time.deltaTime;
         }
         
 
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            velocity.y = 8;   
+            if (down || (!down && canDoubleJump))
+            {
+                velocity.y = jumpPower;
+                canDoubleJump = down;
+            }
         }
 
         player.GetComponent<Rigidbody2D>().MovePosition(player.position + (velocity * Time.deltaTime));
@@ -53,7 +60,6 @@ public class PlayerController1 : MonoBehaviour {
         if (velocity.y < 0)
         {
             down = true;
-            
         }
         velocity.y = 0;
     }

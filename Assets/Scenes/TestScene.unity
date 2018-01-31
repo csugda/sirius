@@ -358,7 +358,7 @@ SpriteRenderer:
   m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: cc56e01b42c99e54b95dac055cf0424c, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.7607844, g: 0.7607844, b: 0.7607844, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -672,10 +672,9 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 943668025}
-  - component: {fileID: 943668023}
-  - component: {fileID: 943668026}
-  - component: {fileID: 943668024}
   - component: {fileID: 943668027}
+  - component: {fileID: 943668024}
+  - component: {fileID: 943668023}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -706,8 +705,8 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
+  m_Size: {x: 0.5, y: 0.5}
+  m_EdgeRadius: 0.25
 --- !u!114 &943668024
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -720,7 +719,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: {x: 0, y: 0, z: 0}
-  speed: 3
+  speed: 5
+  gravity: 30
+  jumpPower: 12.8
 --- !u!4 &943668025
 Transform:
   m_ObjectHideFlags: 0
@@ -735,21 +736,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &943668026
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 943668022}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9392a6cdca00bdf4eb99b334983e0085, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveForce: 100
-  jumpPower: 700
-  decelModifier: 0.1
-  maxSpeed: 10
 --- !u!50 &943668027
 Rigidbody2D:
   serializedVersion: 4
