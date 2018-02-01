@@ -16,6 +16,7 @@ public class PlayerController1 : MonoBehaviour {
     public float speed;
     public float gravity;
     public float jumpPower;
+    //public float maxDownSpeed;
     private bool down = false;
     private bool canDoubleJump  = true;
 	// Update is called once per frame
@@ -37,7 +38,9 @@ public class PlayerController1 : MonoBehaviour {
         {
             velocity.y -= gravity * Time.deltaTime;
         }
-        
+
+       // if (velocity.y < -maxDownSpeed)
+       //     velocity.y = 0.5f;
 
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
@@ -52,10 +55,10 @@ public class PlayerController1 : MonoBehaviour {
         
         //player.SetPositionAndRotation(player.position + ( velocity*Time.deltaTime), player.rotation);
     }
-    
+    int touching = 0;
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        
+        touching++;
         //Debug.Log("hit");
         if (velocity.y < 0)
         {
@@ -65,6 +68,10 @@ public class PlayerController1 : MonoBehaviour {
     }
     private void OnCollisionExit2D(Collision2D collision)
     {
-        down = false;
+        touching--;
+        if (touching == 0)
+        {
+            down = false;
+        }
     }
 }
