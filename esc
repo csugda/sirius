@@ -1,0 +1,289 @@
+[1mdiff --git a/Assets/PlayerController.cs b/Assets/PlayerController.cs[m
+[1mdeleted file mode 100644[m
+[1mindex 121fe41..0000000[m
+[1m--- a/Assets/PlayerController.cs[m
+[1m+++ /dev/null[m
+[36m@@ -1,30 +0,0 @@[m
+[31m-﻿using System.Collections;[m
+[31m-using System.Collections.Generic;[m
+[31m-using UnityEngine;[m
+[31m-[m
+[31m-public class PlayerController : MonoBehaviour {[m
+[31m-    private Rigidbody2D player;[m
+[31m-    public float moveForce, jumpPower, decelModifier, maxSpeed;[m
+[31m-	// Use this for initialization[m
+[31m-	void Start () {[m
+[31m-        player = this.gameObject.GetComponent<Rigidbody2D>();[m
+[31m-	}[m
+[31m-	[m
+[31m-	// Update is called once per frame[m
+[31m-	void Update () {[m
+[31m-        if (Input.GetKey(KeyCode.LeftArrow) && player.velocity.x > -maxSpeed)[m
+[31m-            player.AddForce(new Vector2(-moveForce, 0));[m
+[31m-        else if (Input.GetKey(KeyCode.RightArrow) && player.velocity.x < maxSpeed)[m
+[31m-            player.AddForce(new Vector2(moveForce, 0));[m
+[31m-[m
+[31m-        if (player.velocity.x != 0)[m
+[31m-        {[m
+[31m-            player.velocity = (Vector2.Lerp(player.velocity, new Vector2(0, player.velocity.y), decelModifier)); [m
+[31m-        }[m
+[31m-[m
+[31m-        if (Input.GetKeyDown(KeyCode.UpArrow))[m
+[31m-        {[m
+[31m-            player.AddForce(new Vector2(0, jumpPower));[m
+[31m-        }[m
+[31m-    }[m
+[31m-}[m
+[1mdiff --git a/Assets/PlayerController.cs.meta b/Assets/PlayerController.cs.meta[m
+[1mdeleted file mode 100644[m
+[1mindex 615faf4..0000000[m
+[1m--- a/Assets/PlayerController.cs.meta[m
+[1m+++ /dev/null[m
+[36m@@ -1,13 +0,0 @@[m
+[31m-fileFormatVersion: 2[m
+[31m-guid: 9392a6cdca00bdf4eb99b334983e0085[m
+[31m-timeCreated: 1516824732[m
+[31m-licenseType: Free[m
+[31m-MonoImporter:[m
+[31m-  externalObjects: {}[m
+[31m-  serializedVersion: 2[m
+[31m-  defaultReferences: [][m
+[31m-  executionOrder: 0[m
+[31m-  icon: {instanceID: 0}[m
+[31m-  userData: [m
+[31m-  assetBundleName: [m
+[31m-  assetBundleVariant: [m
+[1mdiff --git a/Assets/Prefabs.meta b/Assets/Prefabs.meta[m
+[1mdeleted file mode 100644[m
+[1mindex 8bfe302..0000000[m
+[1m--- a/Assets/Prefabs.meta[m
+[1m+++ /dev/null[m
+[36m@@ -1,10 +0,0 @@[m
+[31m-fileFormatVersion: 2[m
+[31m-guid: 1cb0e983b8d5c1842990430839994497[m
+[31m-folderAsset: yes[m
+[31m-timeCreated: 1516755354[m
+[31m-licenseType: Free[m
+[31m-DefaultImporter:[m
+[31m-  externalObjects: {}[m
+[31m-  userData: [m
+[31m-  assetBundleName: [m
+[31m-  assetBundleVariant: [m
+[1mdiff --git a/Assets/Scenes/TestScene.unity b/Assets/Scenes/TestScene.unity[m
+[1mindex f18852d..9de90c1 100644[m
+[1m--- a/Assets/Scenes/TestScene.unity[m
+[1m+++ b/Assets/Scenes/TestScene.unity[m
+[36m@@ -77,18 +77,15 @@[m [mLightmapSettings:[m
+     m_PVRDirectSampleCount: 32[m
+     m_PVRSampleCount: 500[m
+     m_PVRBounces: 2[m
+[31m-    m_PVRFilterTypeDirect: 0[m
+[31m-    m_PVRFilterTypeIndirect: 0[m
+[31m-    m_PVRFilterTypeAO: 0[m
+[32m+[m[32m    m_PVRFiltering: 0[m
+     m_PVRFilteringMode: 1[m
+     m_PVRCulling: 1[m
+     m_PVRFilteringGaussRadiusDirect: 1[m
+     m_PVRFilteringGaussRadiusIndirect: 5[m
+     m_PVRFilteringGaussRadiusAO: 2[m
+[31m-    m_PVRFilteringAtrousPositionSigmaDirect: 0.5[m
+[31m-    m_PVRFilteringAtrousPositionSigmaIndirect: 2[m
+[31m-    m_PVRFilteringAtrousPositionSigmaAO: 1[m
+[31m-    m_ShowResolutionOverlay: 1[m
+[32m+[m[32m    m_PVRFilteringAtrousColorSigma: 1[m
+[32m+[m[32m    m_PVRFilteringAtrousNormalSigma: 1[m
+[32m+[m[32m    m_PVRFilteringAtrousPositionSigma: 1[m
+   m_LightingDataAsset: {fileID: 0}[m
+   m_UseShadowmask: 1[m
+ --- !u!196 &4[m
+[36m@@ -110,8 +107,6 @@[m [mNavMeshSettings:[m
+     manualTileSize: 0[m
+     tileSize: 256[m
+     accuratePlacement: 0[m
+[31m-    debug:[m
+[31m-      m_Flags: 0[m
+   m_NavMeshData: {fileID: 0}[m
+ --- !u!1 &76521036[m
+ GameObject:[m
+[36m@@ -124,6 +119,7 @@[m [mGameObject:[m
+   - component: {fileID: 76521039}[m
+   - component: {fileID: 76521038}[m
+   - component: {fileID: 76521037}[m
+[32m+[m[32m  - component: {fileID: 76521041}[m
+   m_Layer: 0[m
+   m_Name: Main Camera[m
+   m_TagString: MainCamera[m
+[36m@@ -176,11 +172,11 @@[m [mCamera:[m
+   m_TargetEye: 3[m
+   m_HDR: 1[m
+   m_AllowMSAA: 1[m
+[31m-  m_AllowDynamicResolution: 0[m
+   m_ForceIntoRT: 0[m
+   m_OcclusionCulling: 1[m
+   m_StereoConvergence: 10[m
+   m_StereoSeparation: 0.022[m
+[32m+[m[32m  m_StereoMirrorMode: 0[m
+ --- !u!4 &76521040[m
+ Transform:[m
+   m_ObjectHideFlags: 0[m
+[36m@@ -194,6 +190,24 @@[m [mTransform:[m
+   m_Father: {fileID: 0}[m
+   m_RootOrder: 0[m
+   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}[m
+[32m+[m[32m--- !u!114 &76521041[m
+[32m+[m[32mMonoBehaviour:[m
+[32m+[m[32m  m_ObjectHideFlags: 0[m
+[32m+[m[32m  m_PrefabParentObject: {fileID: 0}[m
+[32m+[m[32m  m_PrefabInternal: {fileID: 0}[m
+[32m+[m[32m  m_GameObject: {fileID: 76521036}[m
+[32m+[m[32m  m_Enabled: 1[m
+[32m+[m[32m  m_EditorHideFlags: 0[m
+[32m+[m[32m  m_Script: {fileID: 11500000, guid: 7c01ef506de158549973eeeda9eba14b, type: 3}[m
+[32m+[m[32m  m_Name:[m[41m [m
+[32m+[m[32m  m_EditorClassIdentifier:[m[41m [m
+[32m+[m[32m  target: {fileID: 1275739652}[m
+[32m+[m[32m  trackSpeed: 5[m
+[32m+[m[32m  yMaxEnabled: 1[m
+[32m+[m[32m  yMaxValue: 0[m
+[32m+[m[32m  yMinEnabled: 1[m
+[32m+[m[32m  yMinValue: 0[m
+[32m+[m[32m  cameraOffSet: {x: 0, y: 3, z: -5}[m
+ --- !u!1 &615417624[m
+ GameObject:[m
+   m_ObjectHideFlags: 0[m
+[36m@@ -259,7 +273,6 @@[m [mSpriteRenderer:[m
+   m_Enabled: 1[m
+   m_CastShadows: 0[m
+   m_ReceiveShadows: 0[m
+[31m-  m_DynamicOccludee: 1[m
+   m_MotionVectors: 1[m
+   m_LightProbeUsage: 1[m
+   m_ReflectionProbeUsage: 1[m
+[36m@@ -275,7 +288,6 @@[m [mSpriteRenderer:[m
+   m_PreserveUVs: 0[m
+   m_IgnoreNormalsForChartDetection: 0[m
+   m_ImportantGI: 0[m
+[31m-  m_StitchLightmapSeams: 0[m
+   m_SelectedEditorRenderState: 0[m
+   m_MinimumChartSize: 4[m
+   m_AutoUVMaxDistance: 0.5[m
+[36m@@ -332,7 +344,6 @@[m [mSpriteRenderer:[m
+   m_Enabled: 1[m
+   m_CastShadows: 0[m
+   m_ReceiveShadows: 0[m
+[31m-  m_DynamicOccludee: 1[m
+   m_MotionVectors: 1[m
+   m_LightProbeUsage: 1[m
+   m_ReflectionProbeUsage: 1[m
+[36m@@ -348,7 +359,6 @@[m [mSpriteRenderer:[m
+   m_PreserveUVs: 0[m
+   m_IgnoreNormalsForChartDetection: 0[m
+   m_ImportantGI: 0[m
+[31m-  m_StitchLightmapSeams: 0[m
+   m_SelectedEditorRenderState: 0[m
+   m_MinimumChartSize: 4[m
+   m_AutoUVMaxDistance: 0.5[m
+[36m@@ -431,7 +441,6 @@[m [mSpriteRenderer:[m
+   m_Enabled: 1[m
+   m_CastShadows: 0[m
+   m_ReceiveShadows: 0[m
+[31m-  m_DynamicOccludee: 1[m
+   m_MotionVectors: 1[m
+   m_LightProbeUsage: 1[m
+   m_ReflectionProbeUsage: 1[m
+[36m@@ -447,7 +456,6 @@[m [mSpriteRenderer:[m
+   m_PreserveUVs: 0[m
+   m_IgnoreNormalsForChartDetection: 0[m
+   m_ImportantGI: 0[m
+[31m-  m_StitchLightmapSeams: 0[m
+   m_SelectedEditorRenderState: 0[m
+   m_MinimumChartSize: 4[m
+   m_AutoUVMaxDistance: 0.5[m
+[36m@@ -530,7 +538,6 @@[m [mSpriteRenderer:[m
+   m_Enabled: 1[m
+   m_CastShadows: 0[m
+   m_ReceiveShadows: 0[m
+[31m-  m_DynamicOccludee: 1[m
+   m_MotionVectors: 1[m
+   m_LightProbeUsage: 1[m
+   m_ReflectionProbeUsage: 1[m
+[36m@@ -546,7 +553,6 @@[m [mSpriteRenderer:[m
+   m_PreserveUVs: 0[m
+   m_IgnoreNormalsForChartDetection: 0[m
+   m_ImportantGI: 0[m
+[31m-  m_StitchLightmapSeams: 0[m
+   m_SelectedEditorRenderState: 0[m
+   m_MinimumChartSize: 4[m
+   m_AutoUVMaxDistance: 0.5[m
+[36m@@ -629,7 +635,6 @@[m [mSpriteRenderer:[m
+   m_Enabled: 1[m
+   m_CastShadows: 0[m
+   m_ReceiveShadows: 0[m
+[31m-  m_DynamicOccludee: 1[m
+   m_MotionVectors: 1[m
+   m_LightProbeUsage: 1[m
+   m_ReflectionProbeUsage: 1[m
+[36m@@ -645,7 +650,6 @@[m [mSpriteRenderer:[m
+   m_PreserveUVs: 0[m
+   m_IgnoreNormalsForChartDetection: 0[m
+   m_ImportantGI: 0[m
+[31m-  m_StitchLightmapSeams: 0[m
+   m_SelectedEditorRenderState: 0[m
+   m_MinimumChartSize: 4[m
+   m_AutoUVMaxDistance: 0.5[m
+[36m@@ -826,7 +830,6 @@[m [mSpriteRenderer:[m
+   m_Enabled: 1[m
+   m_CastShadows: 0[m
+   m_ReceiveShadows: 0[m
+[31m-  m_DynamicOccludee: 1[m
+   m_MotionVectors: 1[m
+   m_LightProbeUsage: 1[m
+   m_ReflectionProbeUsage: 1[m
+[36m@@ -842,7 +845,6 @@[m [mSpriteRenderer:[m
+   m_PreserveUVs: 0[m
+   m_IgnoreNormalsForChartDetection: 0[m
+   m_ImportantGI: 0[m
+[31m-  m_StitchLightmapSeams: 0[m
+   m_SelectedEditorRenderState: 0[m
+   m_MinimumChartSize: 4[m
+   m_AutoUVMaxDistance: 0.5[m
+[36m@@ -984,7 +986,6 @@[m [mSpriteRenderer:[m
+   m_Enabled: 1[m
+   m_CastShadows: 0[m
+   m_ReceiveShadows: 0[m
+[31m-  m_DynamicOccludee: 1[m
+   m_MotionVectors: 1[m
+   m_LightProbeUsage: 1[m
+   m_ReflectionProbeUsage: 1[m
+[36m@@ -1000,7 +1001,6 @@[m [mSpriteRenderer:[m
+   m_PreserveUVs: 0[m
+   m_IgnoreNormalsForChartDetection: 0[m
+   m_ImportantGI: 0[m
+[31m-  m_StitchLightmapSeams: 0[m
+   m_SelectedEditorRenderState: 0[m
+   m_MinimumChartSize: 4[m
+   m_AutoUVMaxDistance: 0.5[m
+[1mdiff --git a/Assets/Scripts.meta b/Assets/Scripts.meta[m
+[1mindex 2c3c3e1..c3327e8 100644[m
+[1m--- a/Assets/Scripts.meta[m
+[1m+++ b/Assets/Scripts.meta[m
+[36m@@ -1,10 +1,9 @@[m
+ fileFormatVersion: 2[m
+[31m-guid: 8925f9f21f51e2f4fa98d4cb382d0dbe[m
+[32m+[m[32mguid: c65e93fd293b9c54ea83ecf66ba95f2a[m
+ folderAsset: yes[m
+[31m-timeCreated: 1516755341[m
+[32m+[m[32mtimeCreated: 1517591323[m
+ licenseType: Free[m
+ DefaultImporter:[m
+[31m-  externalObjects: {}[m
+   userData: [m
+   assetBundleName: [m
+   assetBundleVariant: [m
+[1mdiff --git a/ProjectSettings/ProjectVersion.txt b/ProjectSettings/ProjectVersion.txt[m
+[1mindex e6cd1f9..a211ccd 100644[m
+[1m--- a/ProjectSettings/ProjectVersion.txt[m
+[1m+++ b/ProjectSettings/ProjectVersion.txt[m
+[36m@@ -1 +1 @@[m
+[31m-m_EditorVersion: 2017.3.0f3[m
+[32m+[m[32mm_EditorVersion: 2017.1.1f1[m
