@@ -1120,7 +1120,11 @@ MonoBehaviour:
   velocity: {x: 0, y: 0, z: 0}
   speed: 6.5
   gravity: 30
-  jumpPower: 10
+  jumpPower: 8
+  down: 0
+  groundFallVelocity: -2
+  touching: 0
+  maxDownSpeed: 20
 --- !u!4 &943668025
 Transform:
   m_ObjectHideFlags: 0
