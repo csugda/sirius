@@ -17,7 +17,7 @@ public class PlayerController1 : MonoBehaviour {
     public float gravity;
     public float jumpPower;
     //public float maxDownSpeed;
-    private bool down = false;
+    public bool down = false;
     private bool canDoubleJump  = true;
 	// Update is called once per frame
 	void FixedUpdate () {
@@ -39,8 +39,11 @@ public class PlayerController1 : MonoBehaviour {
             velocity.y -= gravity * Time.deltaTime;
         }
 
-       // if (velocity.y < -maxDownSpeed)
-       //     velocity.y = 0.5f;
+        if (velocity.y < -maxDownSpeed)
+        {
+            Debug.LogError("Player tried to fall through the floor; Correcting");
+            velocity.y = 0.5f;
+        }
 
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
@@ -55,7 +58,10 @@ public class PlayerController1 : MonoBehaviour {
         
         //player.SetPositionAndRotation(player.position + ( velocity*Time.deltaTime), player.rotation);
     }
-    int touching = 0;
+    public float groundFallVelocity;
+    public int touching = 0;
+    public int maxDownSpeed;
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         touching++;
@@ -64,7 +70,7 @@ public class PlayerController1 : MonoBehaviour {
         {
             down = true;
         }
-        velocity.y = 0;
+        velocity.y = groundFallVelocity;// * Time.deltaTime;
     }
     private void OnCollisionExit2D(Collision2D collision)
     {
