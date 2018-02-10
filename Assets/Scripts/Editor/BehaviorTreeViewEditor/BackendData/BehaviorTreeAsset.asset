@@ -15,5 +15,24 @@ MonoBehaviour:
   - _ID: 0
     _Name: root
     _Depth: -1
-    BehaviorName: root
-    BehaviorTreeManager: {fileID: 0}
+    ElementType: 
+  - _ID: 13
+    _Name: Default Selector
+    _Depth: 0
+    ElementType: Selector
+  - _ID: 14
+    _Name: Default Selector
+    _Depth: 1
+    ElementType: Selector
+  - _ID: 15
+    _Name: Behavior 15
+    _Depth: 2
+    ElementType: BehaviorTreeElement
+  - _ID: 17
+    _Name: Behavior 17
+    _Depth: 3
+    ElementType: BehaviorTreeElement
+  - _ID: 16
+    _Name: Behavior 16
+    _Depth: 3
+    ElementType: BehaviorTreeElement

@@ -11,8 +11,8 @@ namespace Assets.Scripts.AI.Decorators
     {
         protected BehaviorTreeElement DecoratedBehavior;
 
-        public BehaviorDecorator(string name, int depth, int id, BehaviorType bType) 
-            : base(name, depth, id, bType)
+        public BehaviorDecorator(string name, int depth, int id) 
+            : base(name, depth, id)
         {
         }
     } 

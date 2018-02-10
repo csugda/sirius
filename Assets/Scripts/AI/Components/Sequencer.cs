@@ -5,8 +5,8 @@ namespace Assets.Scripts.AI.Components
 {
     public class Sequencer : BehaviorComponent
     {
-        public Sequencer(string name, int depth, int id, BehaviorType bType) 
-            : base(name, depth, id, BehaviorType.Sequencer)
+        public Sequencer(string name, int depth, int id) 
+            : base(name, depth, id)
         {
         }
 

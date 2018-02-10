@@ -11,8 +11,8 @@ namespace Assets.Scripts.AI.Components
         protected HashSet<BehaviorTreeElement> RunningChildren;
         protected HashSet<BehaviorTreeElement> FinishedRunningChildren;
 
-        public BehaviorComponent(string name, int depth, int id, BehaviorType bType) 
-            : base(name, depth, id, bType)
+        public BehaviorComponent(string name, int depth, int id) 
+            : base(name, depth, id)
         {
         }
     }

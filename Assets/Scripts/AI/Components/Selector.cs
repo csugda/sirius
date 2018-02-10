@@ -7,7 +7,7 @@ namespace Assets.Scripts.AI.Components
     public class Selector : BehaviorComponent
     {
         public Selector(string name, int depth, int id) 
-            : base(name, depth, id, BehaviorType.Selector)
+            : base(name, depth, id)
         {
         }
 

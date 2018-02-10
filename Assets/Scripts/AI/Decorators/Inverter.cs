@@ -6,7 +6,7 @@ namespace Assets.Scripts.AI.Decorators
     public class Inverter : BehaviorDecorator
     {
         public Inverter(string name, int depth, int id) 
-            : base(name, depth, id, BehaviorType.Inverter)
+            : base(name, depth, id)
         {
         }
 

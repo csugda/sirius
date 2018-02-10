@@ -7,7 +7,7 @@ using UnityEditor.IMGUI.Controls;
 using UnityEngine;
 
 
-namespace BehaviorTreeViewEditor.BackEndData
+namespace BehaviorTreeViewEditor.BackendData
 {
 
 	internal class TreeViewItem<T> : TreeViewItem where T : TreeElement
@@ -28,7 +28,6 @@ namespace BehaviorTreeViewEditor.BackEndData
 
 		public TreeModel<T> treeModel { get { return _TreeModel; } }
 		public event Action<IList<TreeViewItem>>  beforeDroppingDraggedItems;
-
 
 		public TreeViewWithTreeModel (TreeViewState state, TreeModel<T> model) : base (state)
 		{

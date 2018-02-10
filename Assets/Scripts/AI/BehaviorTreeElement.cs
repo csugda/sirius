@@ -1,23 +1,26 @@
 ﻿using Assets.Scripts.AI.TreeModel;
+using System;
 using System.Collections;
+using System.Reflection;
 using UnityEngine;
 
 namespace Assets.Scripts.AI
 {
-    [System.Serializable]
+    [Serializable]
     public class BehaviorTreeElement : TreeElement
     {
-        public BehaviorType ElementType = BehaviorType.None;
-        public BehaviorManager BehaviorTreeManager;
+        [SerializeField]
+        public string ElementType;
 
-        private BehaviorState _CurrentState;
+        [NonSerialized] public BehaviorManager BehaviorTreeManager;
 
-        public BehaviorTreeElement(string name, int depth, int id, BehaviorType bType = BehaviorType.None) 
+        public BehaviorTreeElement(string name, int depth, int id) 
             : base(name, depth, id)
         {
-            this.ElementType = bType;
+            ElementType = this.GetType().Name.ToString();
         }
 
+        private BehaviorState _CurrentState;
         public BehaviorState CurrentState
         {
             get
