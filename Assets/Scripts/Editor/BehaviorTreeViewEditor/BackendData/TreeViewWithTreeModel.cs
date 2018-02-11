@@ -44,6 +44,7 @@ namespace BehaviorTreeViewEditor.BackendData
 		{
 			_TreeModel = model;
 			_TreeModel.modelChanged += ModelChanged;
+            
 		}
 
 		void ModelChanged ()

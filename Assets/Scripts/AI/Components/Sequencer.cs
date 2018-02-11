@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace Assets.Scripts.AI.Components
 {
+    /// <summary>
+    /// Runs until a child returns in a fail state
+    /// </summary>
     public class Sequencer : BehaviorComponent
     {
         public Sequencer(string name, int depth, int id) 
@@ -10,47 +13,27 @@ namespace Assets.Scripts.AI.Components
         {
         }
 
-        public override IEnumerator Tick()
+        public override IEnumerator Tick(UnityEngine.WaitForSeconds delayStart = null)
         {
-            bool childRunning = false;
-
-            foreach (var behaviorRun in RunningChildren)
-            {
-                this.BehaviorTreeManager.StartCoroutine(behaviorRun.Tick());
-                if (behaviorRun.CurrentState != BehaviorState.Running)
-                {
-                    FinishedRunningChildren.Add(behaviorRun);
-                }
-            }
-
+            yield return delayStart;
             foreach (var behavior in SubBehaviors)
             {
-                if (behavior.CurrentState == BehaviorState.Running ||
-                    FinishedRunningChildren.Contains(behavior)) continue;
-                this.BehaviorTreeManager.StartCoroutine(behavior.Tick());
-                switch (behavior.CurrentState)
+                yield return BehaviorTreeManager.StartCoroutine(behavior.Tick());
+
+                if (behavior.CurrentState != BehaviorState.Success)
                 {
-                    case BehaviorState.Fail:
-                        this.CurrentState = BehaviorState.Fail;
-                        break;
-                    case BehaviorState.Success:
-                        CurrentState = BehaviorState.Running;
-                        continue;
-                    case BehaviorState.Running:
-                        CurrentState = BehaviorState.Running;
-                        childRunning = true;
-                        this.RunningChildren.Add(behavior);
-                        continue;
-                    default:
-                        Debug.LogError("Not a valid BehaviorState.");
-                        break;
+                    this.CurrentState = behavior.CurrentState;
+
+                    if (this.CurrentState == BehaviorState.Fail)
+                    {
+                        //This selector has completed, break out of the operation
+                        yield break;
+                    }
                 }
             }
-
-            RunningChildren.RemoveWhere(a => FinishedRunningChildren.Contains(a));
-            this.CurrentState = !childRunning ? BehaviorState.Success : BehaviorState.Running;
-            yield return null;
+            //if it gets here, it went through all subbehaviors and had no fails
+            CurrentState = BehaviorState.Success;
+            yield break;
         }
     }
-
 }

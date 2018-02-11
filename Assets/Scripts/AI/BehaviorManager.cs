@@ -1,54 +1,61 @@
-﻿using System.Collections.Generic;
+﻿using Assets.Scripts.AI.Components;
+using Assets.Scripts.AI.TreeModel;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Scripts.AI
 {
     public class BehaviorManager : MonoBehaviour
     {
-        [SerializeField]
-        public BehaviorTreeElement[] SubBehaviors;
-        private HashSet<BehaviorTreeElement> RunningChildren = new HashSet<BehaviorTreeElement>();
-        private HashSet<BehaviorTreeElement> FinishedRunningChildren = new HashSet<BehaviorTreeElement>();
+        /// <summary>
+        /// Primary Runner for this manager. 
+        /// Runs all sub-behaviors/trees at the same time using the specified parallelrunner attributes.
+        /// </summary>
+        public ParallelRunner Runner;
 
-        //TODO:: This needs to return to the first element whenever a sub element fails
-        //       and there are no more running sub-tasks.
+        public List<BehaviorTreeElement> BehaviorTreeList;
 
-        void Update()
+        //TODO: Add ILogger *(perhaps Observer pattern? This is our "singleton")
+        //Dispatch messages to observed classes and receive that information here...
+        //How to store? List? Dictionary? My face? Cat Pictures?
+        void Start()
         {
-            bool childRunning = false;
-            foreach (var behaviorRun in RunningChildren)
-            {
-                StartCoroutine(behaviorRun.Tick());
-                if(behaviorRun.CurrentState != BehaviorState.Running)
-                {
-                    FinishedRunningChildren.Add(behaviorRun);
-                    RunningChildren.Remove(behaviorRun);
-                }
-            }
+            //This will act as the treeModel's root element. It will be hidden in the treeview.
+            if (BehaviorTreeList == null) BehaviorTreeList = new List<BehaviorTreeElement>();
+            if (Runner == null) Runner = new ParallelRunner("Main Root", -1, 0);
 
-            foreach (var behavior in SubBehaviors)
-            {
-                if (behavior.CurrentState == BehaviorState.Running ||
-                    FinishedRunningChildren.Contains(behavior)) continue;
-                StartCoroutine(behavior.Tick());
+            Debug.Log("Starting ticks on runner. Runner: \n\t" + Runner.ToString());
+            StartBehaviorTree();
+            Debug.LogWarning("All Coroutines Should be DONE now! Ending all to make sure....");
+            StopAllCoroutines();
+        }
 
-                switch (behavior.CurrentState)
-                {
-                    case BehaviorState.Fail:
-                        //need to stop or finish all running tasks and restart cycle
-                        break;
-                    case BehaviorState.Success:
-                        continue;
-                    case BehaviorState.Running:
-                        childRunning = true;
-                        this.RunningChildren.Add(behavior);
-                        continue;
-                    default:
-                        Debug.LogError("Not a valid BehaviorState.");
-                        break;
-                }
-                FinishedRunningChildren.Clear();
+        /// <summary>
+        /// Ticks on the aggregate ParallelRunner then continues ticking for as long as the runner is in running satte
+        /// </summary>
+        /// <returns></returns>
+        private IEnumerator StartBehaviorTree()
+        {
+            Runner.Tick();
+            while (Runner.CurrentState == BehaviorState.Running)
+            {
+                yield return StartCoroutine(Runner.Tick());
             }
+        }
+
+        public TreeModel GetTreeModel<T>()
+        {
+            return null;
+        }
+
+        bool LoadTree()
+        {
+            return false;
+        }
+
+        void SaveTree(string filepath)
+        {
         }
     }
 }

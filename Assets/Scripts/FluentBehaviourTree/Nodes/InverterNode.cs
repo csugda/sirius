@@ -59,5 +59,12 @@ namespace FluentBehaviourTree
 
             this.childNode = child;
         }
+
+        public List<IBehaviourTreeNode> GetChildren()
+        {
+            var children = new List<IBehaviourTreeNode>();
+            children.Add(childNode);
+            return children;
+        }
     }
 }

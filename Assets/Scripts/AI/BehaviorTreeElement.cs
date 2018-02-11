@@ -1,6 +1,7 @@
 ﻿using Assets.Scripts.AI.TreeModel;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 
@@ -9,15 +10,14 @@ namespace Assets.Scripts.AI
     [Serializable]
     public class BehaviorTreeElement : TreeElement
     {
-        [SerializeField]
-        public string ElementType;
+        [SerializeField] public string ElementType;
 
-        [NonSerialized] public BehaviorManager BehaviorTreeManager;
+        [NonSerialized] protected static BehaviorManager BehaviorTreeManager;
 
         public BehaviorTreeElement(string name, int depth, int id) 
             : base(name, depth, id)
         {
-            ElementType = this.GetType().Name.ToString();
+            ElementType = this.GetType().ToString();
         }
 
         private BehaviorState _CurrentState;
@@ -33,8 +33,13 @@ namespace Assets.Scripts.AI
             }
         }
 
-        public virtual IEnumerator Tick()
+        public virtual IEnumerator Tick(WaitForSeconds delayStart = null)
         {
+            if (delayStart != null)
+            {
+                yield return delayStart;
+            }
+
             yield return null;
         }
 

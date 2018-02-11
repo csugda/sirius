@@ -8,12 +8,11 @@ namespace Assets.Scripts.AI.Nodes
     {
         public BehaviorNode(string name, int depth, int id) 
             : base(name, depth, id)
-        {
-        }
+        { }
 
-        public override IEnumerator Tick()
+        public override IEnumerator Tick(WaitForSeconds delayStart = null)
         {
-            return base.Tick();
+            return base.Tick(delayStart);
         }
     }
 }

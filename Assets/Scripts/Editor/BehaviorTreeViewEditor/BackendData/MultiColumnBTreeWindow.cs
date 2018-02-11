@@ -21,11 +21,11 @@ namespace BehaviorTreeViewEditor.BackendData
         MultiColumnBehaviorTreeView _TreeView;
         BehaviorTreeAsset _BehaviorTreeAsset;
 
-        [MenuItem("Behavior Tree/New")]
+        [MenuItem("Behavior Tree/New Tree")]
         public static MultiColumnBTreeWindow GetWindow()
         {
             var window = GetWindow<MultiColumnBTreeWindow>();
-            window.titleContent = new GUIContent("Multi Columns");
+            window.titleContent = new GUIContent("Behavior Tree Builder");
             window.Focus();
             window.Repaint();
             return window;
@@ -52,7 +52,7 @@ namespace BehaviorTreeViewEditor.BackendData
 
         Rect multiColumnTreeViewRect
         {
-            get { return new Rect(20, 50, position.width - 40, position.height - 60); }
+            get { return new Rect(20, 50, position.width - 40, position.height - 70); }
         }
 
         Rect toolbarRect
@@ -67,7 +67,7 @@ namespace BehaviorTreeViewEditor.BackendData
 
         Rect bottomToolbarRect
         {
-            get { return new Rect(20f, position.height - 18f, position.width - 40f, 16f); }
+            get { return new Rect(20f, position.height - 18f, position.width - 60f, 16f); }
         }
 
         public MultiColumnBehaviorTreeView treeView
@@ -159,9 +159,9 @@ namespace BehaviorTreeViewEditor.BackendData
                 GenericMenu menu = new GenericMenu();
 
                 var style = "miniButton";
-                if (EditorGUILayout.DropdownButton(new GUIContent("Add Behavior"), FocusType.Passive, style))
+                if (EditorGUILayout.DropdownButton(new GUIContent("Add Behavior"), FocusType.Passive, style, GUILayout.Width(130)))
                 {
-                    foreach (var elType in GetListOfTypes<BehaviorTreeElement>())
+                    foreach (var elType in BehaviorTreeViewExtensions.GetListOfTypes<BehaviorTreeElement>())
                     {
                         menu.AddItem(new GUIContent(elType.ToString()), false, OnTypeSelected, elType.ToString());
                     }
@@ -182,11 +182,9 @@ namespace BehaviorTreeViewEditor.BackendData
             Debug.Log(typeName);
 
             Type type = typeof(BehaviorTreeElement).Assembly.GetType((string)typeName, true);
-            var element = Activator.CreateInstance(type, "Behavior" + id ,depth, id);
+            var element = Activator.CreateInstance(type, type.ToString() + " " + id ,depth, id);
             _TreeView.treeModel.AddElement((BehaviorTreeElement)element, parent, 0);
             _TreeView.SetSelection(new[] { id }, TreeViewSelectionOptions.RevealAndFrame);
-
-
         }
 
         void BottomToolBar(Rect rect)
@@ -237,19 +235,8 @@ namespace BehaviorTreeViewEditor.BackendData
             GUILayout.EndArea();
         }
 
-        public static IEnumerable<string> GetListOfTypes<T>() where T : class
-        {
-            List<string> objects = new List<string>();
-            foreach (Type type in
-                Assembly.GetAssembly(typeof(T)).GetTypes()
-                .Where(myType => myType.IsClass && !myType.IsAbstract && myType.IsSubclassOf(typeof(T))))
-            {
-                objects.Add(type.FullName);
-            }
-            return objects;
-        }
-    }
 
+    }
 
     internal class BTreeMultiColumnHeader : MultiColumnHeader
     {

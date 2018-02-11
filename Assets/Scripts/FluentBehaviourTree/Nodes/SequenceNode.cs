@@ -46,5 +46,10 @@ namespace FluentBehaviourTree
         {
             children.Add(child);
         }
+
+        public List<IBehaviourTreeNode> GetChildren()
+        {
+            return children;
+        }
     }
 }

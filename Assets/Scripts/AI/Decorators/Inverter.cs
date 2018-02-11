@@ -7,12 +7,11 @@ namespace Assets.Scripts.AI.Decorators
     {
         public Inverter(string name, int depth, int id) 
             : base(name, depth, id)
-        {
-        }
+        { }
 
-        public override IEnumerator Tick()
+        public override IEnumerator Tick(WaitForSeconds delaySTart = null)
         {
-            this.BehaviorTreeManager.StartCoroutine(DecoratedBehavior.Tick());
+            yield return BehaviorTreeManager.StartCoroutine(DecoratedBehavior.Tick());
 
             switch (DecoratedBehavior.CurrentState)
             {

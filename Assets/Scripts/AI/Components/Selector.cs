@@ -4,53 +4,37 @@ using System.Collections.Generic;
 
 namespace Assets.Scripts.AI.Components
 {
+    /// <summary>
+    /// Ticks all sub behaviors until a behavior returns success.
+    /// Returns and is in success state if a child was successful, otherwise returns in fail state
+    /// </summary>
     public class Selector : BehaviorComponent
     {
         public Selector(string name, int depth, int id) 
             : base(name, depth, id)
-        {
-        }
+        { }
 
-        public override IEnumerator Tick()
+        public override IEnumerator Tick(UnityEngine.WaitForSeconds delayStart = null)
         {
-            foreach (var behaviorRun in RunningChildren)
-            {
-                this.BehaviorTreeManager.StartCoroutine(behaviorRun.Tick());
-                if (behaviorRun.CurrentState != BehaviorState.Running)
-                {
-                    FinishedRunningChildren.Add(behaviorRun);
-                }
-            }
-
+            yield return delayStart;
             foreach (var behavior in SubBehaviors)
             {
-                if (behavior.CurrentState == BehaviorState.Running ||
-                    FinishedRunningChildren.Contains(behavior)) continue;
-                //if the behavior is NOT in Running right now, it has finished or has 
-                //not started yet. Give it some sugah.
-                this.BehaviorTreeManager.StartCoroutine(behavior.Tick());
-                switch (behavior.CurrentState)
+                yield return BehaviorTreeManager.StartCoroutine(behavior.Tick());
+
+                if (behavior.CurrentState != BehaviorState.Fail)
                 {
-                    case BehaviorState.Success:
-                        //we have our selection
-                        CurrentState = BehaviorState.Success;
-                        break;
-                    case BehaviorState.Fail:
-                        //keep going!
-                        CurrentState = BehaviorState.Null;
-                        break;
-                    case BehaviorState.Running:
-                        CurrentState = BehaviorState.Running;
-                        RunningChildren.Add(behavior);
-                        break;
-                    default:
-                        UnityEngine.Debug.LogError("Oh shiz, a selector broke BAD!");
-                        break;
+                    this.CurrentState = behavior.CurrentState;
+
+                    if (this.CurrentState == BehaviorState.Success)
+                    {
+                        //This selector has completed, break out of the operation
+                        yield break;
+                    }
                 }
             }
-            RunningChildren.RemoveWhere(a => FinishedRunningChildren.Contains(a));
-
-            yield return null;
+            //if it gets here, it went through all subbehaviors and had no successes
+            CurrentState = BehaviorState.Fail;
+            yield break;
         }
     } 
 }

@@ -17,13 +17,13 @@ namespace BehaviorTreeViewEditor.BackendData
     {
         const float kRowHeights = 20f;
         const float kToggleWidth = 18f;
+        const float kTypeButtonWidth = 70f;
         public bool showControls = true;
 
         // All columns
         enum BTreeColumns
         {
-            Name,
-            Type
+            Name
         }
 
         public enum SortOption
@@ -34,7 +34,7 @@ namespace BehaviorTreeViewEditor.BackendData
         // Sort options per column
         SortOption[] m_SortOptions =
         {
-            SortOption.Name 
+            SortOption.Name
         };
 
         public static void TreeToList(TreeViewItem root, IList<TreeViewItem> result)
@@ -75,12 +75,13 @@ namespace BehaviorTreeViewEditor.BackendData
             // Custom setup
             rowHeight = kRowHeights;
             columnIndexForTreeFoldouts = 0;
+            
             showAlternatingRowBackgrounds = true;
             showBorder = true;
             customFoldoutYOffset = (kRowHeights - EditorGUIUtility.singleLineHeight) * 0.5f; // center foldout in the row since we also center content. See RowGUI
             extraSpaceBeforeIconAndLabel = kToggleWidth;
             multicolumnHeader.sortingChanged += OnSortingChanged;
-
+            
             Reload();
         }
 
@@ -158,6 +159,27 @@ namespace BehaviorTreeViewEditor.BackendData
             return myTypes.Order(l => l.data.name, ascending);
         }
 
+        protected override void ContextClickedItem(int id)
+        {
+            var item = treeModel.Find(id);
+            GenericMenu menu = new GenericMenu();
+            foreach (var elType in BehaviorTreeViewExtensions.GetListOfTypes<BehaviorTreeElement>())
+            {
+                object[] obj = new object[2] { item, elType };
+                menu.AddItem(new GUIContent(elType.ToString()), item.ElementType == elType.ToString(), OnTypeSelected, obj);
+            }
+            menu.ShowAsContext();
+        }
+
+        public void OnTypeSelected(object itemTypeSelected)
+        {
+            object[] obj = itemTypeSelected as object[];
+            BehaviorTreeElement element = obj[0] as BehaviorTreeElement;
+            element.ElementType = obj[1].ToString();
+            element.name = element.ElementType + " " + element.id;
+            Reload();
+        }
+
         protected override void RowGUI(RowGUIArgs args)
         {
             var item = (TreeViewItem<BehaviorTreeElement>)args.item;
@@ -168,6 +190,7 @@ namespace BehaviorTreeViewEditor.BackendData
             }
         }
 
+
         void CellGUI(Rect cellRect, TreeViewItem<BehaviorTreeElement> item, BTreeColumns column, ref RowGUIArgs args)
         {
             // Center cell rect vertically (makes it easier to place controls, icons etc in the cells)
@@ -176,57 +199,12 @@ namespace BehaviorTreeViewEditor.BackendData
             switch (column)
             {
                 case BTreeColumns.Name:
-                {
-                    // Do toggle
                     Rect toggleRect = cellRect;
                     toggleRect.x += GetContentIndent(item);
                     toggleRect.width = kToggleWidth;
-
-                    // Default icon and label
-                    args.rowRect = cellRect;
                     base.RowGUI(args);
                     break;
-                }
-                
-                case BTreeColumns.Type:
-                {
-                    GenericMenu menu = new GenericMenu();
-
-                    foreach (var elType in GetListOfTypes<BehaviorTreeElement>())
-                    {
-                        menu.AddItem(new GUIContent(elType.ToString()), false, OnTypeSelected, elType.ToString());
-                    }
-                    if (EditorGUILayout.DropdownButton(new GUIContent("Add Behavior"), FocusType.Passive,GUILayout.Width(50)))
-                    {
-                            menu.ShowAsContext();
-                    }
-                    Rect toggleRect = cellRect;
-                    toggleRect.x += GetContentIndent(item);
-                    toggleRect.width = kToggleWidth;
-
-                    // Default icon and label
-                    args.rowRect = cellRect;
-                    base.RowGUI(args);
-                    break;
-                }
             }
-        }
-
-        public void OnTypeSelected(object typeSelected)
-        {
-            Debug.Log("Changing Type");
-        }
-
-        public static IEnumerable<string> GetListOfTypes<T>() where T : class
-        {
-            List<string> objects = new List<string>();
-            foreach (Type type in
-                Assembly.GetAssembly(typeof(T)).GetTypes()
-                .Where(myType => myType.IsClass && !myType.IsAbstract && myType.IsSubclassOf(typeof(T))))
-            {
-                objects.Add(type.FullName);
-            }
-            return objects;
         }
 
         // Rename
@@ -277,19 +255,8 @@ namespace BehaviorTreeViewEditor.BackendData
                     sortingArrowAlignment = TextAlignment.Center,
                     width = 150,
                     minWidth = 60,
-                    autoResize = false,
+                    autoResize = true,
                     allowToggleVisibility = false
-                },
-                new MultiColumnHeaderState.Column
-                {
-                    headerContent = new GUIContent("Type"),
-                    headerTextAlignment = TextAlignment.Left,
-                    sortedAscending = true,
-                    sortingArrowAlignment = TextAlignment.Center,
-                    width = 150,
-                    minWidth = 15,
-                    autoResize = false,
-                    allowToggleVisibility = true
                 }
         };
 
@@ -326,6 +293,16 @@ namespace BehaviorTreeViewEditor.BackendData
             }
         }
 
-
+        public static IEnumerable<string> GetListOfTypes<T>() where T : class
+        {
+            List<string> objects = new List<string>();
+            foreach (Type type in
+                Assembly.GetAssembly(typeof(T)).GetTypes()
+                .Where(myType => myType.IsClass && !myType.IsAbstract && myType.IsSubclassOf(typeof(T))))
+            {
+                objects.Add(type.FullName);
+            }
+            return objects;
+        }
     }
 }
