@@ -1,4 +1,4 @@
-﻿using Assets.Scripts.AI.TreeModel;
+﻿using Assets.Scripts.AI.Tree;
 using System;
 using System.Collections;
 using System.Collections.Generic;

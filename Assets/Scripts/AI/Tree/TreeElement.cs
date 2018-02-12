@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Assets.Scripts.AI.TreeModel
+namespace Assets.Scripts.AI.Tree
 {
 	[Serializable]
 	public class TreeElement

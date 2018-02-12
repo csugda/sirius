@@ -7,7 +7,7 @@ namespace Assets.Scripts.AI.Components
 {
     public abstract class BehaviorComponent : BehaviorTreeElement
     {
-        protected LinkedList<BehaviorTreeElement> SubBehaviors;
+        protected LinkedList<BehaviorTreeElement> SubBehaviors = new LinkedList<BehaviorTreeElement>();
 
         public BehaviorComponent(string name, int depth, int id) 
             : base(name, depth, id)

@@ -815,7 +815,7 @@ GameObject:
   m_Component:
   - component: {fileID: 433563678}
   - component: {fileID: 433563680}
-  - component: {fileID: 433563679}
+  - component: {fileID: 433563681}
   m_Layer: 0
   m_Name: EnemySprite
   m_TagString: Untagged
@@ -836,17 +836,6 @@ Transform:
   m_Father: {fileID: 364333996}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &433563679
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 433563677}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72950630ffc3e644aa0133a0e13b3c29, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!212 &433563680
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -891,6 +880,18 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!114 &433563681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 433563677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73bc91841bad4424992751c051af5030, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SecondsBetweenTicks: 1
 --- !u!1 &436652324
 GameObject:
   m_ObjectHideFlags: 0

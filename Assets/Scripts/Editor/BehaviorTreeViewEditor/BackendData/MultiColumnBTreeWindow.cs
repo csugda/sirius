@@ -1,5 +1,5 @@
 using Assets.Scripts.AI;
-using Assets.Scripts.AI.TreeModel;
+using Assets.Scripts.AI.Tree;
 using System;
 using System.Collections.Generic;
 using System.Linq;

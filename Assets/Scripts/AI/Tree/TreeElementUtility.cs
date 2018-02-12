@@ -4,7 +4,7 @@ using System.Linq;
 using NUnit.Framework;
 using UnityEditor;
 
-namespace Assets.Scripts.AI.TreeModel
+namespace Assets.Scripts.AI.Tree
 {
 	// TreeElementUtility and TreeElement are useful helper classes for backend tree data structures.
 	// See tests at the bottom for examples of how to use.

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using UnityEngine;
 
 namespace Assets.Scripts.AI.Components
 {
@@ -25,10 +26,12 @@ namespace Assets.Scripts.AI.Components
         public ParallelRunner(string name, int depth, int id)
             : base(name, depth, id) { }
 
-        public override IEnumerator Tick(UnityEngine.WaitForSeconds delayStart = null)
+        public override IEnumerator Tick(WaitForSeconds delayStart = null)
         {
             int numFail = 0;
             int numSucceed = 0;
+
+            Debug.Log("Starting Parallel Tick.");
 
             CurrentState = BehaviorState.Running;
 
@@ -56,7 +59,7 @@ namespace Assets.Scripts.AI.Components
                         yield break;
                     }
                 }
-
+                Debug.Log("Ending Parallel Tick in Run State.");
                 CurrentState = BehaviorState.Running;
             }
         }
