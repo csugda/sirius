@@ -16,7 +16,9 @@ namespace Assets.Scripts.AI.Components
 
         public override IEnumerator Tick(UnityEngine.WaitForSeconds delayStart = null)
         {
+            UnityEngine.Debug.LogError("Selector START");
             yield return delayStart;
+            CurrentState = BehaviorState.Running;
             foreach (var behavior in SubBehaviors)
             {
                 yield return BehaviorTreeManager.StartCoroutine(behavior.Tick());
@@ -27,10 +29,12 @@ namespace Assets.Scripts.AI.Components
 
                     if (this.CurrentState == BehaviorState.Success)
                     {
+                        UnityEngine.Debug.LogError("Selector is success");
                         //This selector has completed, break out of the operation
                         yield break;
                     }
                 }
+                UnityEngine.Debug.LogError("Selector is fail");
             }
             //if it gets here, it went through all subbehaviors and had no successes
             CurrentState = BehaviorState.Fail;

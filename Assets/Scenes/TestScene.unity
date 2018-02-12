@@ -690,7 +690,6 @@ GameObject:
   m_Component:
   - component: {fileID: 364333996}
   - component: {fileID: 364333995}
-  - component: {fileID: 364333994}
   - component: {fileID: 364333993}
   m_Layer: 0
   m_Name: Enemy
@@ -724,25 +723,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.25, y: 0.25}
   m_EdgeRadius: 0.1
---- !u!114 &364333994
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 364333992}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24c4313e5a443a449bdfcf829ddfece4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocity: {x: 0, y: 0, z: 0}
-  speed: 6.5
-  gravity: 30
-  jumpPower: 8
-  down: 0
-  groundFallVelocity: -2
-  touching: 0
-  maxDownSpeed: 20
 --- !u!50 &364333995
 Rigidbody2D:
   serializedVersion: 4
@@ -891,7 +871,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73bc91841bad4424992751c051af5030, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SecondsBetweenTicks: 1
+  Runner:
+    _ID: 0
+    _Name: Main Root
+    _Depth: -1
+    ElementType: Assets.Scripts.AI.Components.ParallelRunner
+    NumberOfFailuresBeforeFail: 0
+    NumberOfFailures: 0
+    NumberOfSuccessBeforeSucceed: 0
+    NumberOfSuccesses: 0
+  BehaviorTreeList:
+  - _ID: 0
+    _Name: 
+    _Depth: 0
+  - _ID: 0
+    _Name: 
+    _Depth: 0
+  SecondsBetweenTicks: 2
+  TimesToTick: 10
 --- !u!1 &436652324
 GameObject:
   m_ObjectHideFlags: 0

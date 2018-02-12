@@ -5,13 +5,16 @@ using UnityEngine;
 
 namespace Assets.Scripts.AI.Components
 {
-    public abstract class BehaviorComponent : BehaviorTreeElement
+    [System.Serializable]
+    public class BehaviorComponent : BehaviorTreeElement
     {
-        protected LinkedList<BehaviorTreeElement> SubBehaviors = new LinkedList<BehaviorTreeElement>();
+        public LinkedList<BehaviorTreeElement> SubBehaviors = new LinkedList<BehaviorTreeElement>();
 
         public BehaviorComponent(string name, int depth, int id) 
             : base(name, depth, id)
-        { }
+        {
+            SubBehaviors = new LinkedList<BehaviorTreeElement>();
+        }
 
         public virtual void AddChild(BehaviorTreeElement element)
         {
@@ -23,7 +26,7 @@ namespace Assets.Scripts.AI.Components
             string retString = base.ToString() + "\n";
             foreach (var child in SubBehaviors)
             {
-                retString += "-> " + child.ToString().PadRight(4);
+                retString += ("-> " + child.ToString()).PadLeft(5);
             }
 
             return retString;

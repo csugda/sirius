@@ -7,6 +7,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.AI.Components
 {
+    [Serializable]
     public class ParallelRunner : BehaviorComponent
     {
         /// <summary>
@@ -15,6 +16,8 @@ namespace Assets.Scripts.AI.Components
         /// 0 for both succeed and fail means loops infinitely
         /// </summary>
         public int NumberOfFailuresBeforeFail = 0;
+        public int NumberOfFailures = 0;
+        
 
         /// <summary>
         /// Number of times the children return success before the parallel runner returns in a success state.
@@ -22,16 +25,14 @@ namespace Assets.Scripts.AI.Components
         /// 0 for both succeed and fail means loops infinitely
         /// </summary>
         public int NumberOfSuccessBeforeSucceed = 0;
+        public int NumberOfSuccesses = 0;
 
         public ParallelRunner(string name, int depth, int id)
             : base(name, depth, id) { }
 
         public override IEnumerator Tick(WaitForSeconds delayStart = null)
         {
-            int numFail = 0;
-            int numSucceed = 0;
-
-            Debug.Log("Starting Parallel Tick.");
+            Debug.LogWarning("Starting Parallel Tick.");
 
             CurrentState = BehaviorState.Running;
 
@@ -42,8 +43,9 @@ namespace Assets.Scripts.AI.Components
 
                 if(NumberOfFailuresBeforeFail != 0 && behavior.CurrentState == BehaviorState.Fail)
                 {
-                    ++numFail;
-                    if(numFail >= NumberOfFailuresBeforeFail)
+                    Debug.LogWarning("    Child returned fail: " + behavior.ToString());
+                    ++NumberOfFailures;
+                    if(NumberOfFailures >= NumberOfFailuresBeforeFail)
                     {
                         CurrentState = BehaviorState.Fail;
                         yield break;
@@ -52,14 +54,15 @@ namespace Assets.Scripts.AI.Components
 
                 if (NumberOfSuccessBeforeSucceed != 0 && behavior.CurrentState == BehaviorState.Success)
                 {
-                    ++numSucceed;
-                    if (numSucceed >= NumberOfSuccessBeforeSucceed)
+                    Debug.LogWarning("    Child returned success: " + behavior.ToString());
+                    ++NumberOfSuccesses;
+                    if (NumberOfSuccesses >= NumberOfSuccessBeforeSucceed)
                     {
                         CurrentState = BehaviorState.Success;
                         yield break;
                     }
                 }
-                Debug.Log("Ending Parallel Tick in Run State.");
+                Debug.LogWarning("Ending Parallel Tick in Run State.");
                 CurrentState = BehaviorState.Running;
             }
         }

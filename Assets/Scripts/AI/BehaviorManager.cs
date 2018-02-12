@@ -6,29 +6,52 @@ using UnityEngine;
 
 namespace Assets.Scripts.AI
 {
+    [System.Serializable]
     public class BehaviorManager : MonoBehaviour
     {
         /// <summary>
         /// Primary Runner for this manager. 
         /// Runs all sub-behaviors/trees at the same time using the specified parallelrunner attributes.
         /// </summary>
-        public ParallelRunner Runner;
+        public ParallelRunner Runner = new ParallelRunner("Main Root", -1, 0);
 
-        public IList<TreeElement> BehaviorTreeList;
+        public List<TreeElement> BehaviorTreeList;
 
         public float SecondsBetweenTicks = 0.1f;
 
         public int TimesToTick = 10;
 
+        private bool initialized = false;
+
+        void OnEnable()
+        {
+            initialized = false;
+            Init();
+        }
+
+        
+        public void Init()
+        {
+            if(initialized == false)
+            {
+                //This will act as the treeModel's root element. It will be hidden in the treeview.
+                if (Runner == null) Runner = new ParallelRunner("Main Root", -1, 0);
+                Runner.AddChild(new Selector("Selector 1", 0, 1));
+                initialized = true;
+            }
+
+        }
+
         //TODO: Add ILogger *(perhaps Observer pattern? This is our "singleton")*
         //Dispatch messages to observed classes and receive that information here...
         //How to store? List? Dictionary? My face? Cat Pictures?
+
+        /// <summary>
+        /// Ticks on the aggregate ParallelRunner then continues ticking for as long as the runner is in running satte
+        /// </summary>
+        /// <returns></returns>
         IEnumerator Start()
         {
-            //This will act as the treeModel's root element. It will be hidden in the treeview.
-            if (BehaviorTreeList == null) BehaviorTreeList = new List<TreeElement>();
-            if (Runner == null) Runner = new ParallelRunner("Main Root", -1, 0);
-
             WaitForSeconds wfs = new WaitForSeconds(SecondsBetweenTicks);
 
             Debug.Log("Starting ticks on Runner: \n\t" + Runner.ToString());
@@ -41,25 +64,10 @@ namespace Assets.Scripts.AI
                 --TimesToTick;
             }
 
-            Debug.LogWarning("All Coroutines Should be DONE now! Ending all to make sure....");
-            //StopAllCoroutines();
+            Debug.Log("All Coroutines Should be DONE now! Ending all to make sure....");
+            StopAllCoroutines();
         }
 
-        /// <summary>
-        /// Ticks on the aggregate ParallelRunner then continues ticking for as long as the runner is in running satte
-        /// </summary>
-        /// <returns></returns>
-        private IEnumerator StartBehaviorTree()
-        {
-            WaitForSeconds wfs = new WaitForSeconds(SecondsBetweenTicks);
-            Runner.Tick();
-            Debug.Log("State: " + Runner.CurrentState);
-            while (Runner.CurrentState == BehaviorState.Running)
-            {
-                yield return StartCoroutine(Runner.Tick(wfs));
-                Debug.Log("State: " + Runner.CurrentState);
-            }
-        }
 
         public TreeModel<TreeElement> GetTreeModel()
         {
