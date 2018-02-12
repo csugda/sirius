@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.AI.Components;
+using Assets.Scripts.AI.Nodes;
 using Assets.Scripts.AI.Tree;
 using System.Collections;
 using System.Collections.Generic;
@@ -36,10 +37,16 @@ namespace Assets.Scripts.AI
             {
                 //This will act as the treeModel's root element. It will be hidden in the treeview.
                 if (Runner == null) Runner = new ParallelRunner("Main Root", -1, 0);
-                Runner.AddChild(new Selector("Selector 1", 0, 1));
+                Runner.BehaviorTreeManager = this;
+
+                var selector = new Selector("Selector 1", 0, 1);
+                var debugNode = new DebugOutNode("meow", 1, 2);
+
+                selector.AddChild(debugNode);
+
+                Runner.AddChild(selector);
                 initialized = true;
             }
-
         }
 
         //TODO: Add ILogger *(perhaps Observer pattern? This is our "singleton")*
@@ -57,7 +64,7 @@ namespace Assets.Scripts.AI
             Debug.Log("Starting ticks on Runner: \n\t" + Runner.ToString());
             Debug.Log("State: " + Runner.CurrentState);
             yield return Runner.Tick();
-            while (Runner.CurrentState == BehaviorState.Running && TimesToTick >= 0)
+            while (Runner.CurrentState == BehaviorState.Running && TimesToTick > 0)
             {
                 yield return StartCoroutine(Runner.Tick(wfs));
                 Debug.Log("State: " + Runner.CurrentState);

@@ -12,7 +12,7 @@ namespace Assets.Scripts.AI
     {
         [SerializeField] public string ElementType;
 
-        [NonSerialized] public BehaviorManager BehaviorTreeManager;
+        public BehaviorManager BehaviorTreeManager;
 
         public BehaviorTreeElement(string name, int depth, int id) 
             : base(name, depth, id)

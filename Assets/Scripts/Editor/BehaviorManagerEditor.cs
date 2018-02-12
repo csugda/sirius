@@ -30,10 +30,6 @@ public class BehaviorManagerEditor : Editor
         using (new EditorGUILayout.VerticalScope())
         {
             EditorGUILayout.PropertyField(runner);
-            //if (behaviorCount > 0)
-            //{
-            //    
-            //}
 
             if (GUILayout.Button("Edit Tree"))
             {

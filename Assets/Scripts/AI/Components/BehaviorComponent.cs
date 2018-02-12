@@ -18,6 +18,8 @@ namespace Assets.Scripts.AI.Components
 
         public virtual void AddChild(BehaviorTreeElement element)
         {
+            element.parent = this;
+            element.BehaviorTreeManager = BehaviorTreeManager;
             SubBehaviors.AddLast(element);
         }
 

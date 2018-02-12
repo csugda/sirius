@@ -32,8 +32,6 @@ namespace Assets.Scripts.AI.Components
 
         public override IEnumerator Tick(WaitForSeconds delayStart = null)
         {
-            Debug.LogWarning("Starting Parallel Tick.");
-
             CurrentState = BehaviorState.Running;
 
             yield return delayStart;
