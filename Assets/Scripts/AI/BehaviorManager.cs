@@ -54,7 +54,7 @@ namespace Assets.Scripts.AI
         //How to store? List? Dictionary? My face? Cat Pictures?
 
         /// <summary>
-        /// Ticks on the aggregate ParallelRunner then continues ticking for as long as the runner is in running satte
+        /// Ticks on the aggregate ParallelRunner then continues ticking for as long as the runner is in running state
         /// </summary>
         /// <returns></returns>
         IEnumerator Start()
