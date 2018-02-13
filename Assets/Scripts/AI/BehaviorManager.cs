@@ -59,7 +59,7 @@ namespace Assets.Scripts.AI
 
             Debug.Log("Starting ticks on Runner: \n\t" + Runner.ToString());
             yield return Runner.Tick();
-            while (Runner.CurrentState == BehaviorState.Running && TimesToTick > 0)
+            while (Runner.CurrentState == BehaviorState.Running || TimesToTick > 0)
             {
                 yield return StartCoroutine(Runner.Tick(wfs));
                 --TimesToTick;
@@ -88,7 +88,6 @@ namespace Assets.Scripts.AI
             var meowNode = new DebugOutNode("meow", 1, 2);
             var inverter = new Inverter("inverter", 1, 3);
             var invertedNode = new DebugOutNode("invertedShouldFail", 2, 4);
-
 
             Runner.AddChild(selector);
             selector.AddChild(inverter);

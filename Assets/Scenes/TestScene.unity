@@ -875,17 +875,20 @@ MonoBehaviour:
     _Depth: -1
     ElementType: Assets.Scripts.AI.Components.ParallelRunner
     BehaviorTreeManager: {fileID: 433563681}
+    _CurrentState: 0
     SubBehaviors:
     - _ID: 1
       _Name: Selector 1
       _Depth: 0
       ElementType: Assets.Scripts.AI.Components.Selector
       BehaviorTreeManager: {fileID: 433563681}
+      _CurrentState: 0
     - _ID: 5
       _Name: parallel
       _Depth: 0
       ElementType: Assets.Scripts.AI.Nodes.DebugOutNode
       BehaviorTreeManager: {fileID: 433563681}
+      _CurrentState: 0
     NumberOfFailuresBeforeFail: 0
     NumberOfFailures: 0
     NumberOfSuccessBeforeSucceed: 0

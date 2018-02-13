@@ -31,13 +31,6 @@ public class BehaviorManagerEditor : Editor
         {
             EditorGUILayout.PropertyField(runner);
 
-            if (runnerBehaviors != null)
-            {
-                EditorGUI.indentLevel += 1;
-                EditorList.Show(runnerBehaviors, EditorListOption.All);
-                EditorGUI.indentLevel -= 1;
-            }
-
             if (GUILayout.Button("Edit Tree"))
             {
                 MultiColumnBTreeWindow btreeWindow = CreateInstance<MultiColumnBTreeWindow>();
