@@ -12,7 +12,7 @@ namespace Assets.Scripts.AI.Decorators
         public override IEnumerator Tick(WaitForSeconds delaySTart = null)
         {
             yield return BehaviorTreeManager.StartCoroutine(DecoratedBehavior.Tick());
-
+            Debug.Log("Inverting " + DecoratedBehavior.name);
             switch (DecoratedBehavior.CurrentState)
             {
                 case BehaviorState.Fail:
@@ -28,7 +28,6 @@ namespace Assets.Scripts.AI.Decorators
                     Debug.LogError("Something went wrong in an inverter.");
                     break;
             }
-            yield return null;
         }
     }
 }

@@ -18,9 +18,9 @@ public class BehaviorManagerEditor : Editor
 
     void OnEnable()
     {
+        //has to be initialized
         ((BehaviorManager)serializedObject.targetObject).Init();
         runner = serializedObject.FindProperty("Runner");
-        
     }
 
     public override void OnInspectorGUI()
@@ -30,6 +30,13 @@ public class BehaviorManagerEditor : Editor
         using (new EditorGUILayout.VerticalScope())
         {
             EditorGUILayout.PropertyField(runner);
+
+            if (runnerBehaviors != null)
+            {
+                EditorGUI.indentLevel += 1;
+                EditorList.Show(runnerBehaviors, EditorListOption.All);
+                EditorGUI.indentLevel -= 1;
+            }
 
             if (GUILayout.Button("Edit Tree"))
             {

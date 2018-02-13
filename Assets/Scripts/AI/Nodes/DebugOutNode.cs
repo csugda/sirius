@@ -16,7 +16,7 @@ namespace Assets.Scripts.AI.Nodes
 
         public override IEnumerator Tick(WaitForSeconds delayStart = null)
         {
-            Debug.Log("Behavior node starting... waiting...");
+            Debug.Log(name + "node starting... waiting...");
             yield return delayStart;
             Debug.Log("BEHAVIOR NODE DOIN THE THANG!");
             CurrentState = BehaviorState.Success;

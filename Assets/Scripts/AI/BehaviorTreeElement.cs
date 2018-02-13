@@ -18,8 +18,10 @@ namespace Assets.Scripts.AI
             : base(name, depth, id)
         {
             ElementType = this.GetType().ToString();
+            _CurrentState = BehaviorState.Null;
         }
 
+        [SerializeField]
         private BehaviorState _CurrentState;
         public BehaviorState CurrentState
         {
