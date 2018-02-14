@@ -65,7 +65,8 @@ public static class EditorList {
 				EditorGUILayout.BeginHorizontal();
 			}
 			if (showElementLabels) {
-				EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i));
+                var element = list.GetArrayElementAtIndex(i);
+                EditorGUILayout.PropertyField(element);
 			}
 			else {
 				EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i), GUIContent.none);

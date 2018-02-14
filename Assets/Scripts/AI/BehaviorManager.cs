@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.AI.Components;
+using Assets.Scripts.AI.Decorators;
 using Assets.Scripts.AI.Nodes;
 using Assets.Scripts.AI.Tree;
 using System.Collections;
@@ -26,8 +27,12 @@ namespace Assets.Scripts.AI
 
         void OnEnable()
         {
-            initialized = false;
             Init();
+        }
+
+        void OnStart()
+        {
+            initialized = true;
         }
 
         
@@ -35,17 +40,8 @@ namespace Assets.Scripts.AI
         {
             if(initialized == false)
             {
-                //This will act as the treeModel's root element. It will be hidden in the treeview.
-                if (Runner == null) Runner = new ParallelRunner("Main Root", -1, 0);
-                Runner.BehaviorTreeManager = this;
 
-                var selector = new Selector("Selector 1", 0, 1);
-                var debugNode = new DebugOutNode("meow", 1, 2);
-
-                selector.AddChild(debugNode);
-
-                Runner.AddChild(selector);
-                initialized = true;
+                initialized = LoadTree(); ;
             }
         }
 
@@ -62,12 +58,10 @@ namespace Assets.Scripts.AI
             WaitForSeconds wfs = new WaitForSeconds(SecondsBetweenTicks);
 
             Debug.Log("Starting ticks on Runner: \n\t" + Runner.ToString());
-            Debug.Log("State: " + Runner.CurrentState);
             yield return Runner.Tick();
-            while (Runner.CurrentState == BehaviorState.Running && TimesToTick > 0)
+            while (Runner.CurrentState == BehaviorState.Running || TimesToTick > 0)
             {
                 yield return StartCoroutine(Runner.Tick(wfs));
-                Debug.Log("State: " + Runner.CurrentState);
                 --TimesToTick;
             }
 
@@ -83,7 +77,26 @@ namespace Assets.Scripts.AI
 
         bool LoadTree()
         {
-            return false;
+            //This will act as the treeModel's root element. It will be hidden in the treeview.
+            Runner = new ParallelRunner("Main Root", -1, 0)
+            {
+                BehaviorTreeManager = this
+            };
+
+            var selector = new Selector("Selector 1", 0, 1);
+            var debugNode = new DebugOutNode("parallel", 0, 5);
+            var meowNode = new DebugOutNode("meow", 1, 2);
+            var inverter = new Inverter("inverter", 1, 3);
+            var invertedNode = new DebugOutNode("invertedShouldFail", 2, 4);
+
+            Runner.AddChild(selector);
+            selector.AddChild(inverter);
+            inverter.SetChild(invertedNode);
+
+            selector.AddChild(meowNode);
+
+            Runner.AddChild(debugNode);
+            return true;
         }
 
         void SaveTree(string filepath)

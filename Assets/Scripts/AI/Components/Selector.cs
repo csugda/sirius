@@ -40,5 +40,6 @@ namespace Assets.Scripts.AI.Components
             CurrentState = BehaviorState.Fail;
             yield break;
         }
+
     } 
 }

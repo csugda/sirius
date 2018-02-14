@@ -62,6 +62,7 @@ namespace Assets.Scripts.AI.Components
                 }
                 Debug.LogWarning("Ending Parallel Tick in Run State.");
                 CurrentState = BehaviorState.Running;
+                yield return null;
             }
         }
     }

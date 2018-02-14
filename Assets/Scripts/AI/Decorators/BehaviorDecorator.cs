@@ -15,5 +15,12 @@ namespace Assets.Scripts.AI.Decorators
             : base(name, depth, id)
         {
         }
+
+        public virtual void SetChild(BehaviorTreeElement element)
+        {
+            element.parent = this;
+            element.BehaviorTreeManager = BehaviorTreeManager;
+            DecoratedBehavior = element;
+        }
     } 
 }

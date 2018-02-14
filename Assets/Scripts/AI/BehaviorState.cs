@@ -7,7 +7,7 @@
     /// </summary>
     public enum BehaviorState
     {
-        Null,
+        Null = 0,
         Fail,
         Success,
         Running

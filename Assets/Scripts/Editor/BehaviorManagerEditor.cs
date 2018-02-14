@@ -18,9 +18,9 @@ public class BehaviorManagerEditor : Editor
 
     void OnEnable()
     {
+        //has to be initialized
         ((BehaviorManager)serializedObject.targetObject).Init();
         runner = serializedObject.FindProperty("Runner");
-        
     }
 
     public override void OnInspectorGUI()
