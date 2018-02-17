@@ -18,7 +18,6 @@ namespace Assets.Scripts.AI.Components
         public int NumberOfFailuresBeforeFail = 0;
         public int NumberOfFailures = 0;
         
-
         /// <summary>
         /// Number of times the children return success before the parallel runner returns in a success state.
         /// 0 means ignore number of sucesses.
@@ -35,7 +34,7 @@ namespace Assets.Scripts.AI.Components
             CurrentState = BehaviorState.Running;
 
             yield return delayStart;
-            foreach (var behavior in SubBehaviors)
+            foreach (BehaviorTreeElement behavior in children)
             {
                 BehaviorTreeManager.StartCoroutine(behavior.Tick());
 

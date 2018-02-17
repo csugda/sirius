@@ -44,9 +44,15 @@ namespace BehaviorTreeViewEditor.BackendData
             return false; // we did not handle the open
         }
 
-        void SetTreeAsset(BehaviorTreeAsset BehaviorTreeAsset)
+        public void SetTreeAsset(BehaviorTreeAsset BehaviorTreeAsset)
         {
+            if(BehaviorTreeAsset == null)
+            {
+                CreateNewTree();
+            }
             _BehaviorTreeAsset = BehaviorTreeAsset;
+            AssetDatabase.Refresh();
+            EditorUtility.SetDirty(_BehaviorTreeAsset);
             _Initialized = false;
         }
 
@@ -106,14 +112,27 @@ namespace BehaviorTreeViewEditor.BackendData
 
         IList<BehaviorTreeElement> GetData()
         {
-            if (_BehaviorTreeAsset == null || _BehaviorTreeAsset.treeElements == null || _BehaviorTreeAsset.treeElements.Count <= 0)
+            if (_BehaviorTreeAsset == null)
             {
-                _BehaviorTreeAsset = new BehaviorTreeAsset();
+                CreateNewTree();
+            }
+
+            if(_BehaviorTreeAsset.treeElements == null || _BehaviorTreeAsset.treeElements.Count <= 0)
+            {
                 _BehaviorTreeAsset.treeElements.Add(new BehaviorTreeElement("root", -1, 0));
             }
-               
 
+            AssetDatabase.Refresh();
+            EditorUtility.SetDirty(_BehaviorTreeAsset);
             return _BehaviorTreeAsset.treeElements;
+        }
+
+        void CreateNewTree()
+        {
+            _BehaviorTreeAsset = CreateInstance<BehaviorTreeAsset>();
+            AssetDatabase.CreateAsset(_BehaviorTreeAsset, "Assets/Scripts/AI/BehaviorTrees/" + name + ".asset");
+            AssetDatabase.Refresh();
+            EditorUtility.SetDirty(_BehaviorTreeAsset);
         }
 
         void OnSelectionChange()
@@ -167,6 +186,12 @@ namespace BehaviorTreeViewEditor.BackendData
                     }
                     menu.ShowAsContext();
                 }
+                if(GUILayout.Button("Save Tree"))
+                {
+                    TreeElementUtility.TreeToList(_TreeView.treeModel.root, _BehaviorTreeAsset.treeElements);
+                    Debug.Log("Count:" + _BehaviorTreeAsset.treeElements.Count);
+                    SaveAsset();
+                }
             }
 
             GUILayout.EndArea();
@@ -187,13 +212,18 @@ namespace BehaviorTreeViewEditor.BackendData
             _TreeView.SetSelection(new[] { id }, TreeViewSelectionOptions.RevealAndFrame);
         }
 
+        void SaveAsset()
+        {
+            EditorUtility.SetDirty(_BehaviorTreeAsset);
+            AssetDatabase.SaveAssets();
+        }
+
         void BottomToolBar(Rect rect)
         {
             GUILayout.BeginArea(rect);
 
             using (new EditorGUILayout.HorizontalScope())
             {
-
                 var style = "miniButton";
                 if (GUILayout.Button("Expand All", style))
                 {
@@ -207,35 +237,12 @@ namespace BehaviorTreeViewEditor.BackendData
 
                 GUILayout.FlexibleSpace();
 
-                GUILayout.Label(_BehaviorTreeAsset != null ? AssetDatabase.GetAssetPath(_BehaviorTreeAsset) : string.Empty);
-
-                GUILayout.FlexibleSpace();
-
-
-                GUILayout.Label("Header: ", "minilabel");
-                if (GUILayout.Button("Large", style))
-                {
-                    var myColumnHeader = (BTreeMultiColumnHeader)treeView.multiColumnHeader;
-                    myColumnHeader.mode = BTreeMultiColumnHeader.Mode.LargeHeader;
-                }
-                if (GUILayout.Button("Default", style))
-                {
-                    var myColumnHeader = (BTreeMultiColumnHeader)treeView.multiColumnHeader;
-                    myColumnHeader.mode = BTreeMultiColumnHeader.Mode.DefaultHeader;
-                }
-                if (GUILayout.Button("No sort", style))
-                {
-                    var myColumnHeader = (BTreeMultiColumnHeader)treeView.multiColumnHeader;
-                    myColumnHeader.mode = BTreeMultiColumnHeader.Mode.MinimumHeaderWithoutSorting;
-                }
-
+                GUILayout.Label(_BehaviorTreeAsset != null ? AssetDatabase.GetAssetPath(_BehaviorTreeAsset) : "No Asset Loaded");
                 GUILayout.Space(10);
             }
 
             GUILayout.EndArea();
         }
-
-
     }
 
     internal class BTreeMultiColumnHeader : MultiColumnHeader

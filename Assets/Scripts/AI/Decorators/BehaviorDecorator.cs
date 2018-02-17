@@ -20,7 +20,8 @@ namespace Assets.Scripts.AI.Decorators
         {
             element.parent = this;
             element.BehaviorTreeManager = BehaviorTreeManager;
-            DecoratedBehavior = element;
+            children.Clear();
+            children.Add(element);
         }
     } 
 }

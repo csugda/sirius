@@ -2,7 +2,7 @@ using Assets.Scripts.AI;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace BehaviorTreeViewEditor.BackendData
+namespace Assets.Scripts.AI
 {
     [System.Serializable]
 	public class BehaviorTreeAsset : ScriptableObject
@@ -11,7 +11,7 @@ namespace BehaviorTreeViewEditor.BackendData
         List<BehaviorTreeElement> _TreeElements =
             new List<BehaviorTreeElement>();
 
-		internal List<BehaviorTreeElement> treeElements
+		public List<BehaviorTreeElement> treeElements
 		{
 			get { return _TreeElements; }
 			set { _TreeElements = value; }

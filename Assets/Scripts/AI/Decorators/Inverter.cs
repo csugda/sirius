@@ -11,9 +11,12 @@ namespace Assets.Scripts.AI.Decorators
 
         public override IEnumerator Tick(WaitForSeconds delaySTart = null)
         {
-            yield return BehaviorTreeManager.StartCoroutine(DecoratedBehavior.Tick());
-            Debug.Log("Inverting " + DecoratedBehavior.name);
-            switch (DecoratedBehavior.CurrentState)
+            if (children == null) yield return null;
+            if (children.Count <= 0) yield return null;
+            var behavior = children[0] as BehaviorTreeElement;
+            yield return BehaviorTreeManager.StartCoroutine(behavior.Tick());
+            Debug.Log("Inverting " + children[0].name);
+            switch (behavior.CurrentState)
             {
                 case BehaviorState.Fail:
                     this.CurrentState = BehaviorState.Success;
