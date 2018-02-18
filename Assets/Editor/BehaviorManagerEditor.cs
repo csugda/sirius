@@ -5,22 +5,16 @@ using UnityEngine;
 [CustomEditor(typeof(BehaviorManager))]
 public class BehaviorManagerEditor : Editor
 {
-    SerializedProperty runner;
     SerializedProperty assets;
     SerializedProperty SecondsBetweenTicks;
     SerializedProperty TimesToTick;
 
     BehaviorManager manager;
 
-
-
-    string TreeName = "NewBehavior";
-
     void OnEnable()
     {
         ((BehaviorManager)serializedObject.targetObject).Init();
         //has to be initialized
-        runner = serializedObject.FindProperty("Runner");
         assets = serializedObject.FindProperty("BehaviorTrees");
         TimesToTick = serializedObject.FindProperty("TimesToTick");
         SecondsBetweenTicks = serializedObject.FindProperty("SecondsBetweenTicks");
@@ -38,15 +32,13 @@ public class BehaviorManagerEditor : Editor
             var btrees = ((BehaviorManager)serializedObject.targetObject).BehaviorTrees;
             if (btrees == null || btrees.Count <= 0)
             {
-                TreeName = EditorGUILayout.TextField(TreeName);
                 if (GUILayout.Button("Create New Tree"))
                 {
-                    var Asset = CreateInstance<BehaviorTreeAsset>();
-                    AssetDatabase.CreateAsset(Asset, "Assets/Scripts/AI/BehaviorTrees/" + TreeName + ".asset");
-                    AssetDatabase.Refresh();
+                    CustomAssetUtility.CreateAsset<BehaviorTreeAsset>();
+                    var Asset = (BehaviorTreeAsset)Selection.activeObject;
+
                     ((BehaviorManager)serializedObject.targetObject).BehaviorTrees.Add(Asset);
                     ((BehaviorManager)serializedObject.targetObject).LoadTree();
-                    EditorUtility.SetDirty(Asset);
                 }
             }
             else
