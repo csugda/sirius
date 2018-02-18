@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Assets.Scripts.AI.Components
 {
     [System.Serializable]
-    public class BehaviorComponent : BehaviorTreeElement
+    public abstract class BehaviorComponent : BehaviorTreeElement
     {
         public BehaviorComponent(string name, int depth, int id) 
             : base(name, depth, id)

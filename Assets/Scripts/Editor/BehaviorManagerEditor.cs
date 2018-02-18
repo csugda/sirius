@@ -17,6 +17,8 @@ public class BehaviorManagerEditor : Editor
 
     BehaviorManager manager;
 
+    string TreeName = "NewBehavior";
+
     void OnEnable()
     {
         ((BehaviorManager)serializedObject.targetObject).Init();
@@ -40,11 +42,11 @@ public class BehaviorManagerEditor : Editor
 
             if (((BehaviorManager)serializedObject.targetObject).BehaviorTree == null)
             {
-                var name = EditorGUILayout.TextField("NewBehavior");
+                TreeName = EditorGUILayout.TextField(TreeName);
                 if (GUILayout.Button("Create New Tree"))
                 {
                     Asset = CreateInstance<BehaviorTreeAsset>();
-                    AssetDatabase.CreateAsset(Asset, "Assets/Scripts/AI/BehaviorTrees/" + name + ".asset");
+                    AssetDatabase.CreateAsset(Asset, "Assets/Scripts/AI/BehaviorTrees/" + TreeName + ".asset");
                     AssetDatabase.Refresh();
                     ((BehaviorManager)serializedObject.targetObject).BehaviorTree = Asset;
                     ((BehaviorManager)serializedObject.targetObject).LoadTree();

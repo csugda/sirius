@@ -11,7 +11,7 @@ namespace Assets.Scripts.AI.Tree
 		[SerializeField] string _Name;
 		[SerializeField] int _Depth;
 		[NonSerialized] TreeElement _Parent;
-		[SerializeField] List<TreeElement> _Children;
+		[NonSerialized] List<TreeElement> _Children;
 
 		public int depth
 		{
