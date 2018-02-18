@@ -9,24 +9,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 609375caf67b25d4cb7acad6fc07ed64, type: 3}
-  m_Name: New BehaviorTreeAsset
+  m_Name: New BehaviorTreeAsset 1
   m_EditorClassIdentifier: 
   _TreeElements:
   - _ID: 0
     _Name: root
     _Depth: -1
     ElementType: Assets.Scripts.AI.BehaviorTreeElement
-    BehaviorTreeManager: {fileID: 0}
-    _CurrentState: 0
-  - _ID: 1
-    _Name: Inverter 1
-    _Depth: 0
-    ElementType: Assets.Scripts.AI.Decorators.Inverter
-    BehaviorTreeManager: {fileID: 0}
-    _CurrentState: 0
-  - _ID: 2
-    _Name: DebugOutNode 2
-    _Depth: 1
-    ElementType: Assets.Scripts.AI.Nodes.DebugOutNode
     BehaviorTreeManager: {fileID: 0}
     _CurrentState: 0
