@@ -19,8 +19,8 @@ namespace Assets.Scripts.AI
         /// Runs all sub-behaviors/trees at the same time using the specified parallelrunner attributes.
         /// </summary>
         public ParallelRunner Runner = new ParallelRunner("Main Root", -1, 0);
-        
-        public List<BehaviorTreeAsset> BehaviorTrees;
+
+        public List<BehaviorTreeAsset> BehaviorTrees = new List<BehaviorTreeAsset>();
 
         public float SecondsBetweenTicks = 0.1f;
 
@@ -79,7 +79,7 @@ namespace Assets.Scripts.AI
             if (BehaviorTrees != null)
             {
                 var newList = new List<BehaviorTreeElement>();
-                foreach(var behaviorAsset in BehaviorTrees)
+                foreach (var behaviorAsset in BehaviorTrees)
                 {
                     foreach (var behavior in behaviorAsset.treeElements)
                     {
@@ -98,7 +98,11 @@ namespace Assets.Scripts.AI
                 //LOAD TREE
                 return true;
             }
-            else return false;
+            else
+            {
+                BehaviorTrees = new List<BehaviorTreeAsset>();
+                return true;
+            };
         }
     }
 }

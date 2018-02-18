@@ -784,13 +784,9 @@ MonoBehaviour:
     NumberOfFailures: 0
     NumberOfSuccessBeforeSucceed: 0
     NumberOfSuccesses: 0
-  BehaviorTrees:
-  - {fileID: 11400000, guid: 7231a750554856f47825742a64870071, type: 2}
-  - {fileID: 11400000, guid: 98d71192267e2f34f8c014658713a164, type: 2}
-  - {fileID: 11400000, guid: be8c5c14077763b438c8ffd1c03e033a, type: 2}
-  - {fileID: 11400000, guid: 2bc96d8433355744e98bd2112b388c71, type: 2}
-  SecondsBetweenTicks: 0.5
-  TimesToTick: 100
+  BehaviorTrees: []
+  SecondsBetweenTicks: 0.1
+  TimesToTick: 10
 --- !u!50 &364333995
 Rigidbody2D:
   serializedVersion: 4

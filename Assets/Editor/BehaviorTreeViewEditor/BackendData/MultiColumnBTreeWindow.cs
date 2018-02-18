@@ -190,7 +190,6 @@ namespace BehaviorTreeViewEditor.BackendData
                     TreeElementUtility.TreeToList(_TreeView.treeModel.root, _BehaviorTreeAsset.treeElements);
                     
                     SaveAsset();
-
                 }
             }
 

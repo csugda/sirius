@@ -23,13 +23,13 @@ public class BehaviorManagerEditor : Editor
     public override void OnInspectorGUI()
     {
         serializedObject.Update();
-        //runnerBehaviors = runner.FindPropertyRelative("children");
 
         using (new EditorGUILayout.VerticalScope())
         {
             EditorGUILayout.PropertyField(TimesToTick);
             EditorGUILayout.PropertyField(SecondsBetweenTicks);
             var btrees = ((BehaviorManager)serializedObject.targetObject).BehaviorTrees;
+            EditorList.Show(assets, EditorListOption.Buttons);
             if (btrees == null || btrees.Count <= 0)
             {
 
@@ -44,17 +44,12 @@ public class BehaviorManagerEditor : Editor
             }
             else
             {
-                EditorList.Show(assets, EditorListOption.Buttons);
+                
                 if (GUILayout.Button("Load/Reload Trees"))
                 {
                     AssetDatabase.Refresh();
                     ((BehaviorManager)serializedObject.targetObject).BehaviorTrees = btrees;
-                    ((BehaviorManager)serializedObject.targetObject).LoadTree();
-
-                    foreach(var behavior in btrees)
-                    {
-                        EditorUtility.SetDirty(behavior);
-                    } 
+                    ((BehaviorManager)serializedObject.targetObject).LoadTree(); 
                 }
             }
         }
