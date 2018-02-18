@@ -913,27 +913,6 @@ MonoBehaviour:
     _ID: -1
     _Name: Main Root
     _Depth: -1
-    _Children:
-    - _ID: 1
-      _Name: Selector 1
-      _Depth: 0
-      _Children:
-      - _ID: 3
-        _Name: inverter
-        _Depth: 1
-        _Children:
-        - _ID: 4
-          _Name: invertedShouldFail
-          _Depth: 2
-          _Children: []
-      - _ID: 2
-        _Name: meow
-        _Depth: 1
-        _Children: []
-    - _ID: 5
-      _Name: parallel
-      _Depth: 0
-      _Children: []
     ElementType: Assets.Scripts.AI.Components.ParallelRunner
     BehaviorTreeManager: {fileID: 433563681}
     _CurrentState: 0
@@ -942,7 +921,7 @@ MonoBehaviour:
     NumberOfSuccessBeforeSucceed: 0
     NumberOfSuccesses: 0
   BehaviorTreeList: []
-  BehaviorTree: {fileID: 11400000, guid: be8c5c14077763b438c8ffd1c03e033a, type: 2}
+  BehaviorTree: {fileID: 11400000, guid: 7231a750554856f47825742a64870071, type: 2}
   SecondsBetweenTicks: 2
   TimesToTick: 10
 --- !u!1 &436652324
