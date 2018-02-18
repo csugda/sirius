@@ -789,7 +789,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2bc96d8433355744e98bd2112b388c71, type: 2}
   - {fileID: 11400000, guid: be8c5c14077763b438c8ffd1c03e033a, type: 2}
   - {fileID: 11400000, guid: 98d71192267e2f34f8c014658713a164, type: 2}
-  SecondsBetweenTicks: 0
+  SecondsBetweenTicks: 0.51
   TimesToTick: 100
 --- !u!50 &364333995
 Rigidbody2D:
