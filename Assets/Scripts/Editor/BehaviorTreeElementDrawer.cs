@@ -35,7 +35,6 @@ public class BehaviorTreeElementDrawer : PropertyDrawer
         EditorGUI.BeginProperty(pos, label, prop);
 
         var nameRect = new Rect(pos.x - 5, pos.y, 2 * pos.width / 3, pos.height);
-        var managerRect = new Rect(pos.x, pos.y, pos.width, pos.height);
 
         var behaviorState = prop.FindPropertyRelative("_CurrentState");
 

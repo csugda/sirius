@@ -166,7 +166,8 @@ namespace BehaviorTreeViewEditor.BackendData
             foreach (var elType in BehaviorTreeViewExtensions.GetListOfTypes<BehaviorTreeElement>())
             {
                 object[] obj = new object[2] { item, elType };
-                menu.AddItem(new GUIContent(elType.ToString()), item.ElementType == elType.ToString(), OnTypeSelected, obj);
+                var menuStrings = elType.ToString().Split('.');
+                menu.AddItem(new GUIContent(menuStrings[menuStrings.Length - 2] + "/" + menuStrings.Last()), item.ElementType == elType.ToString(), OnTypeSelected, obj);
             }
             menu.ShowAsContext();
         }
@@ -176,7 +177,7 @@ namespace BehaviorTreeViewEditor.BackendData
             object[] obj = itemTypeSelected as object[];
             BehaviorTreeElement element = obj[0] as BehaviorTreeElement;
             element.ElementType = obj[1].ToString();
-            element.name = element.ElementType + " " + element.id;
+            element.name = element.ElementType.Split('.').Last() + " " + element.id;
             Reload();
         }
 
