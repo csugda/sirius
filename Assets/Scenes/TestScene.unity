@@ -88,6 +88,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaDirect: 0.5
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
+    m_ShowResolutionOverlay: 1
   m_LightingDataAsset: {fileID: 0}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -367,6 +368,7 @@ Camera:
   m_TargetEye: 3
   m_HDR: 1
   m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -699,6 +701,24 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!251 &352456895
+PlatformEffector2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 352456891}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RotationalOffset: 0
+  m_UseOneWay: 0
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 1
+  m_UseSideBounce: 0
+  m_SideArc: 1
 --- !u!1 &364333992
 GameObject:
   m_ObjectHideFlags: 0
@@ -709,6 +729,7 @@ GameObject:
   - component: {fileID: 364333996}
   - component: {fileID: 364333995}
   - component: {fileID: 364333993}
+  - component: {fileID: 364333994}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -741,6 +762,31 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.25, y: 0.25}
   m_EdgeRadius: 0.1
+--- !u!114 &364333994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 364333992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73bc91841bad4424992751c051af5030, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Runner:
+    _ID: -1
+    _Name: Main Root
+    _Depth: -1
+    ElementType: Assets.Scripts.AI.Components.ParallelRunner
+    BehaviorTreeManager: {fileID: 364333994}
+    _CurrentState: 0
+    NumberOfFailuresBeforeFail: 0
+    NumberOfFailures: 0
+    NumberOfSuccessBeforeSucceed: 0
+    NumberOfSuccesses: 0
+  BehaviorTrees: []
+  SecondsBetweenTicks: 0.1
+  TimesToTick: 10
 --- !u!50 &364333995
 Rigidbody2D:
   serializedVersion: 4
@@ -775,24 +821,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!251 &352456895
-PlatformEffector2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 352456891}
-  m_Enabled: 1
-  m_UseColliderMask: 1
-  m_ColliderMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RotationalOffset: 0
-  m_UseOneWay: 0
-  m_UseOneWayGrouping: 0
-  m_SurfaceArc: 180
-  m_UseSideFriction: 1
-  m_UseSideBounce: 0
-  m_SideArc: 1
 --- !u!1 &392956676
 GameObject:
   m_ObjectHideFlags: 0
@@ -831,7 +859,6 @@ GameObject:
   m_Component:
   - component: {fileID: 433563678}
   - component: {fileID: 433563680}
-  - component: {fileID: 433563681}
   m_Layer: 0
   m_Name: EnemySprite
   m_TagString: Untagged
@@ -896,44 +923,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
---- !u!114 &433563681
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 433563677}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73bc91841bad4424992751c051af5030, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Runner:
-    _ID: 0
-    _Name: Main Root
-    _Depth: -1
-    ElementType: Assets.Scripts.AI.Components.ParallelRunner
-    BehaviorTreeManager: {fileID: 433563681}
-    _CurrentState: 0
-    SubBehaviors:
-    - _ID: 1
-      _Name: Selector 1
-      _Depth: 0
-      ElementType: Assets.Scripts.AI.Components.Selector
-      BehaviorTreeManager: {fileID: 433563681}
-      _CurrentState: 0
-    - _ID: 5
-      _Name: parallel
-      _Depth: 0
-      ElementType: Assets.Scripts.AI.Nodes.DebugOutNode
-      BehaviorTreeManager: {fileID: 433563681}
-      _CurrentState: 0
-    NumberOfFailuresBeforeFail: 0
-    NumberOfFailures: 0
-    NumberOfSuccessBeforeSucceed: 0
-    NumberOfSuccesses: 0
-  BehaviorTreeList: []
-  SecondsBetweenTicks: 2
-  TimesToTick: 10
 --- !u!1 &436652324
 GameObject:
   m_ObjectHideFlags: 0
@@ -1574,7 +1563,7 @@ Transform:
   m_LocalScale: {x: 1.9588697, y: 1.980747, z: 1}
   m_Children: []
   m_Father: {fileID: 1946567224}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &867706914
 GameObject:
@@ -2441,7 +2430,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1424901802}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.95, y: -3.2899997, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.47017032, y: -0.26496375, z: 1}
   m_Children: []
   m_Father: {fileID: 1080835410}
@@ -2848,7 +2837,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 2073160879}
   - {fileID: 856031103}
+  - {fileID: 122623900}
   m_Father: {fileID: 1506373089}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

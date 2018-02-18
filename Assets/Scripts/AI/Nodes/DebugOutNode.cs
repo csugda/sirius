@@ -11,8 +11,7 @@ namespace Assets.Scripts.AI.Nodes
     {
         public DebugOutNode(string name, int depth, int id) 
             : base(name, depth, id)
-        {
-        }
+        { }
 
         public override IEnumerator Tick(WaitForSeconds delayStart = null)
         {

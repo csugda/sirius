@@ -48,7 +48,7 @@ namespace BehaviorTreeViewEditor.BackendData
         {
             if(BehaviorTreeAsset == null)
             {
-                CreateNewTree();
+                //CreateNewTree();
             }
             _BehaviorTreeAsset = BehaviorTreeAsset;
             AssetDatabase.Refresh();
@@ -129,10 +129,8 @@ namespace BehaviorTreeViewEditor.BackendData
 
         void CreateNewTree()
         {
-            _BehaviorTreeAsset = CreateInstance<BehaviorTreeAsset>();
-            AssetDatabase.CreateAsset(_BehaviorTreeAsset, "Assets/Scripts/AI/BehaviorTrees/" + name + ".asset");
-            AssetDatabase.Refresh();
-            EditorUtility.SetDirty(_BehaviorTreeAsset);
+            CustomAssetUtility.CreateAsset<BehaviorTreeAsset>();
+            _BehaviorTreeAsset = (BehaviorTreeAsset)Selection.activeObject;
         }
 
         void OnSelectionChange()
@@ -176,20 +174,21 @@ namespace BehaviorTreeViewEditor.BackendData
             using (new EditorGUILayout.HorizontalScope())
             {
                 GenericMenu menu = new GenericMenu();
-
-                var style = "miniButton";
-                if (EditorGUILayout.DropdownButton(new GUIContent("Add Behavior"), FocusType.Passive, style, GUILayout.Width(130)))
+                if (EditorGUILayout.DropdownButton(new GUIContent("Add Behavior"),FocusType.Passive))
                 {
                     foreach (var elType in BehaviorTreeViewExtensions.GetListOfTypes<BehaviorTreeElement>())
                     {
-                        menu.AddItem(new GUIContent(elType.ToString()), false, OnTypeSelected, elType.ToString());
+                        var menuStrings = elType.ToString().Split('.');
+                        menu.AddItem(new GUIContent(menuStrings[menuStrings.Length-2] + 
+                                              "/" + menuStrings.Last()), false, OnTypeSelected, elType.ToString());
                     }
                     menu.ShowAsContext();
                 }
                 if(GUILayout.Button("Save Tree"))
                 {
+                    Debug.Log(AssetDatabase.GetAssetPath(_BehaviorTreeAsset));
                     TreeElementUtility.TreeToList(_TreeView.treeModel.root, _BehaviorTreeAsset.treeElements);
-                    Debug.Log("Count:" + _BehaviorTreeAsset.treeElements.Count);
+                    
                     SaveAsset();
                 }
             }
@@ -204,10 +203,8 @@ namespace BehaviorTreeViewEditor.BackendData
             int depth = parent != null ? parent.depth + 1 : 0;
             int id = _TreeView.treeModel.GenerateUniqueID();
 
-            Debug.Log(typeName);
-
             Type type = typeof(BehaviorTreeElement).Assembly.GetType((string)typeName, true);
-            var element = Activator.CreateInstance(type, type.ToString() + " " + id ,depth, id);
+            var element = Activator.CreateInstance(type, type.ToString().Split('.').Last() + " " + id ,depth, id);
             _TreeView.treeModel.AddElement((BehaviorTreeElement)element, parent, 0);
             _TreeView.SetSelection(new[] { id }, TreeViewSelectionOptions.RevealAndFrame);
         }
@@ -247,69 +244,16 @@ namespace BehaviorTreeViewEditor.BackendData
 
     internal class BTreeMultiColumnHeader : MultiColumnHeader
     {
-        Mode m_Mode;
-
-        public enum Mode
-        {
-            LargeHeader,
-            DefaultHeader,
-            MinimumHeaderWithoutSorting
-        }
-
         public BTreeMultiColumnHeader(MultiColumnHeaderState state)
             : base(state)
         {
-            mode = Mode.DefaultHeader;
-        }
-
-        public Mode mode
-        {
-            get
-            {
-                return m_Mode;
-            }
-            set
-            {
-                m_Mode = value;
-                switch (m_Mode)
-                {
-                    case Mode.LargeHeader:
-                        canSort = true;
-                        height = 37f;
-                        break;
-                    case Mode.DefaultHeader:
-                        canSort = true;
-                        height = DefaultGUI.defaultHeight;
-                        break;
-                    case Mode.MinimumHeaderWithoutSorting:
-                        canSort = false;
-                        height = DefaultGUI.minimumHeight;
-                        break;
-                }
-            }
         }
 
         protected override void ColumnHeaderGUI(MultiColumnHeaderState.Column column, Rect headerRect, int columnIndex)
         {
             // Default column header gui
             base.ColumnHeaderGUI(column, headerRect, columnIndex);
-
-            // Add additional info for large header
-            if (mode == Mode.LargeHeader)
-            {
-                // Show example overlay stuff on some of the columns
-                if (columnIndex > 2)
-                {
-                    headerRect.xMax -= 3f;
-                    var oldAlignment = EditorStyles.largeLabel.alignment;
-                    EditorStyles.largeLabel.alignment = TextAnchor.UpperRight;
-                    GUI.Label(headerRect, 36 + columnIndex + "%", EditorStyles.largeLabel);
-                    EditorStyles.largeLabel.alignment = oldAlignment;
-                }
-            }
         }
-
-
     }
 
 }

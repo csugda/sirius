@@ -35,7 +35,6 @@ public class BehaviorTreeElementDrawer : PropertyDrawer
         EditorGUI.BeginProperty(pos, label, prop);
 
         var nameRect = new Rect(pos.x - 5, pos.y, 2 * pos.width / 3, pos.height);
-        var managerRect = new Rect(pos.x, pos.y, pos.width, pos.height);
 
         var behaviorState = prop.FindPropertyRelative("_CurrentState");
 
@@ -51,18 +50,6 @@ public class BehaviorTreeElementDrawer : PropertyDrawer
         }
 
         EditorGUI.LabelField(nameRect, "Name: " + prop.FindPropertyRelative("_Name").stringValue, style);
-
-        EditorGUILayout.Space();
-
-        
-
-        var subs = prop.FindPropertyRelative("_Children");
-        if (subs != null)
-        {
-            EditorGUI.indentLevel += 1;
-            EditorList.Show(subs, EditorListOption.All);
-            EditorGUI.indentLevel -= 1;
-        }
 
         EditorGUI.EndProperty();
     }
