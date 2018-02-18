@@ -19,6 +19,7 @@ namespace Assets.Scripts.AI
         {
             ElementType = this.GetType().ToString();
             _CurrentState = BehaviorState.Null;
+            children = new List<TreeElement>();
         }
 
         [SerializeField]

@@ -54,15 +54,15 @@ public class BehaviorTreeElementDrawer : PropertyDrawer
 
         EditorGUILayout.Space();
 
-        var subs = prop.FindPropertyRelative("SubBehaviors");
+        
+
+        var subs = prop.FindPropertyRelative("_Children");
         if (subs != null)
         {
             EditorGUI.indentLevel += 1;
             EditorList.Show(subs, EditorListOption.All);
             EditorGUI.indentLevel -= 1;
         }
-
-
 
         EditorGUI.EndProperty();
     }

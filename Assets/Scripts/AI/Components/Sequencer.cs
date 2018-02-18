@@ -16,7 +16,8 @@ namespace Assets.Scripts.AI.Components
         public override IEnumerator Tick(UnityEngine.WaitForSeconds delayStart = null)
         {
             yield return delayStart;
-            foreach (var behavior in SubBehaviors)
+            CurrentState = BehaviorState.Running;
+            foreach (BehaviorTreeElement behavior in children)
             {
                 yield return BehaviorTreeManager.StartCoroutine(behavior.Tick());
 

@@ -8,26 +8,23 @@ namespace Assets.Scripts.AI.Components
     [System.Serializable]
     public class BehaviorComponent : BehaviorTreeElement
     {
-        [SerializeField]
-        public List<BehaviorTreeElement> SubBehaviors = new List<BehaviorTreeElement>();
-
         public BehaviorComponent(string name, int depth, int id) 
             : base(name, depth, id)
         {
-            SubBehaviors = new List<BehaviorTreeElement>();
+            children = new List<Tree.TreeElement>();
         }
 
         public virtual void AddChild(BehaviorTreeElement element)
         {
             element.parent = this;
             element.BehaviorTreeManager = BehaviorTreeManager;
-            SubBehaviors.Add(element);
+            children.Add(element);
         }
 
         public override string ToString()
         {
             string retString = base.ToString() + "\n";
-            foreach (var child in SubBehaviors)
+            foreach (var child in children)
             {
                 retString += ("-> " + child.ToString()).PadLeft(5);
             }

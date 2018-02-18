@@ -1,9 +1,12 @@
-﻿using Assets.Scripts.AI.Components;
+﻿using Assets.Scripts.AI;
+using Assets.Scripts.AI.Components;
 using Assets.Scripts.AI.Decorators;
 using Assets.Scripts.AI.Nodes;
 using Assets.Scripts.AI.Tree;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 namespace Assets.Scripts.AI
@@ -17,7 +20,9 @@ namespace Assets.Scripts.AI
         /// </summary>
         public ParallelRunner Runner = new ParallelRunner("Main Root", -1, 0);
 
-        public List<TreeElement> BehaviorTreeList;
+        public List<BehaviorTreeElement> BehaviorTreeList;
+
+        public BehaviorTreeAsset BehaviorTree;
 
         public float SecondsBetweenTicks = 0.1f;
 
@@ -32,16 +37,14 @@ namespace Assets.Scripts.AI
 
         void OnStart()
         {
-            initialized = true;
-        }
+            Init();
+        }     
 
-        
         public void Init()
         {
             if(initialized == false)
             {
-
-                initialized = LoadTree(); ;
+                initialized = LoadTree();
             }
         }
 
@@ -69,38 +72,52 @@ namespace Assets.Scripts.AI
             StopAllCoroutines();
         }
 
-
-        public TreeModel<TreeElement> GetTreeModel()
+        public bool LoadTree()
         {
-            return new TreeModel<TreeElement>(BehaviorTreeList);
-        }
-
-        bool LoadTree()
-        {
-            //This will act as the treeModel's root element. It will be hidden in the treeview.
-            Runner = new ParallelRunner("Main Root", -1, 0)
+            Runner = new ParallelRunner("Main Root", -1, -1)
             {
                 BehaviorTreeManager = this
             };
+            if (BehaviorTree != null)
+            {
+                var newList = new List<BehaviorTreeElement>();
+                foreach(var behavior in BehaviorTree.treeElements)
+                {
+                    var newBehavior = Activator.CreateInstance(Type.GetType(behavior.ElementType), 
+                                                               behavior.name, behavior.depth, behavior.id);
 
-            var selector = new Selector("Selector 1", 0, 1);
-            var debugNode = new DebugOutNode("parallel", 0, 5);
-            var meowNode = new DebugOutNode("meow", 1, 2);
-            var inverter = new Inverter("inverter", 1, 3);
-            var invertedNode = new DebugOutNode("invertedShouldFail", 2, 4);
+                    if (((BehaviorTreeElement)newBehavior).depth == -1 || ((BehaviorTreeElement)newBehavior).name == "root") continue;
 
-            Runner.AddChild(selector);
-            selector.AddChild(inverter);
-            inverter.SetChild(invertedNode);
+                    ((BehaviorTreeElement)newBehavior).BehaviorTreeManager = this;
 
-            selector.AddChild(meowNode);
+                    newList.Add(newBehavior as BehaviorTreeElement);
+                }
+                newList.Insert(0, Runner);
+                Runner = TreeElementUtility.ListToTree(newList) as ParallelRunner;
+                Debug.Log(Runner);
+                //LOAD TREE
+                return true;
+            }
+            else
+            {
+                //TEST TREE
+                //This will act as the treeModel's root element. It will be hidden in the treeview.
+                var selector = new Selector("Selector 1", 0, 1);
+                var debugNode = new DebugOutNode("parallel", 0, 5);
+                var meowNode = new DebugOutNode("meow", 1, 2);
+                var inverter = new Inverter("inverter", 1, 3);
+                var invertedNode = new DebugOutNode("invertedShouldFail", 2, 4);
 
-            Runner.AddChild(debugNode);
+                Runner.AddChild(selector);
+                selector.AddChild(inverter);
+                inverter.SetChild(invertedNode);
+
+                selector.AddChild(meowNode);
+
+                Runner.AddChild(debugNode);
+            }
+
             return true;
-        }
-
-        void SaveTree(string filepath)
-        {
         }
     }
 }

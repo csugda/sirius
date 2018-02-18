@@ -19,7 +19,7 @@ namespace Assets.Scripts.AI.Components
             UnityEngine.Debug.LogError("Selector START");
             yield return delayStart;
             CurrentState = BehaviorState.Running;
-            foreach (var behavior in SubBehaviors)
+            foreach (BehaviorTreeElement behavior in children)
             {
                 yield return BehaviorTreeManager.StartCoroutine(behavior.Tick());
 
