@@ -48,7 +48,7 @@ namespace BehaviorTreeViewEditor.BackendData
         {
             if(BehaviorTreeAsset == null)
             {
-                CreateNewTree();
+                //CreateNewTree();
             }
             _BehaviorTreeAsset = BehaviorTreeAsset;
             AssetDatabase.Refresh();
@@ -129,10 +129,8 @@ namespace BehaviorTreeViewEditor.BackendData
 
         void CreateNewTree()
         {
-            _BehaviorTreeAsset = CreateInstance<BehaviorTreeAsset>();
-            AssetDatabase.CreateAsset(_BehaviorTreeAsset, "Assets/Scripts/AI/BehaviorTrees/" + name + ".asset");
-            AssetDatabase.Refresh();
-            EditorUtility.SetDirty(_BehaviorTreeAsset);
+            CustomAssetUtility.CreateAsset<BehaviorTreeAsset>();
+            _BehaviorTreeAsset = (BehaviorTreeAsset)Selection.activeObject;
         }
 
         void OnSelectionChange()
@@ -176,23 +174,23 @@ namespace BehaviorTreeViewEditor.BackendData
             using (new EditorGUILayout.HorizontalScope())
             {
                 GenericMenu menu = new GenericMenu();
-
-                var style = "miniButton";
-                if (EditorGUILayout.DropdownButton(new GUIContent("Add Behavior"), FocusType.Passive, style, GUILayout.Width(130)))
+                if (EditorGUILayout.DropdownButton(new GUIContent("Add Behavior"),FocusType.Passive))
                 {
                     foreach (var elType in BehaviorTreeViewExtensions.GetListOfTypes<BehaviorTreeElement>())
                     {
                         var menuStrings = elType.ToString().Split('.');
-                        menu.AddItem(new GUIContent(menuStrings[menuStrings.Length-2]+ "/"+menuStrings.Last()), false, OnTypeSelected, elType.ToString());
+                        menu.AddItem(new GUIContent(menuStrings[menuStrings.Length-2] + 
+                                              "/" + menuStrings.Last()), false, OnTypeSelected, elType.ToString());
                     }
                     menu.ShowAsContext();
                 }
                 if(GUILayout.Button("Save Tree"))
                 {
+                    Debug.Log(AssetDatabase.GetAssetPath(_BehaviorTreeAsset));
                     TreeElementUtility.TreeToList(_TreeView.treeModel.root, _BehaviorTreeAsset.treeElements);
                     
                     SaveAsset();
-                    Debug.Log("Saved tree with " + _BehaviorTreeAsset.treeElements.Count + " nodes");
+
                 }
             }
 

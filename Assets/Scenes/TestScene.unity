@@ -729,6 +729,7 @@ GameObject:
   - component: {fileID: 364333996}
   - component: {fileID: 364333995}
   - component: {fileID: 364333993}
+  - component: {fileID: 364333994}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -761,6 +762,34 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.25, y: 0.25}
   m_EdgeRadius: 0.1
+--- !u!114 &364333994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 364333992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73bc91841bad4424992751c051af5030, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Runner:
+    _ID: -1
+    _Name: Main Root
+    _Depth: -1
+    ElementType: Assets.Scripts.AI.Components.ParallelRunner
+    BehaviorTreeManager: {fileID: 364333994}
+    _CurrentState: 0
+    NumberOfFailuresBeforeFail: 0
+    NumberOfFailures: 0
+    NumberOfSuccessBeforeSucceed: 0
+    NumberOfSuccesses: 0
+  BehaviorTrees:
+  - {fileID: 11400000, guid: 2bc96d8433355744e98bd2112b388c71, type: 2}
+  - {fileID: 11400000, guid: 2bc96d8433355744e98bd2112b388c71, type: 2}
+  - {fileID: 11400000, guid: be8c5c14077763b438c8ffd1c03e033a, type: 2}
+  SecondsBetweenTicks: 0
+  TimesToTick: 100
 --- !u!50 &364333995
 Rigidbody2D:
   serializedVersion: 4
@@ -833,7 +862,6 @@ GameObject:
   m_Component:
   - component: {fileID: 433563678}
   - component: {fileID: 433563680}
-  - component: {fileID: 433563681}
   m_Layer: 0
   m_Name: EnemySprite
   m_TagString: Untagged
@@ -898,32 +926,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
---- !u!114 &433563681
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 433563677}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73bc91841bad4424992751c051af5030, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Runner:
-    _ID: -1
-    _Name: Main Root
-    _Depth: -1
-    ElementType: Assets.Scripts.AI.Components.ParallelRunner
-    BehaviorTreeManager: {fileID: 433563681}
-    _CurrentState: 0
-    NumberOfFailuresBeforeFail: 0
-    NumberOfFailures: 0
-    NumberOfSuccessBeforeSucceed: 0
-    NumberOfSuccesses: 0
-  BehaviorTreeList: []
-  BehaviorTree: {fileID: 11400000, guid: 7231a750554856f47825742a64870071, type: 2}
-  SecondsBetweenTicks: 2
-  TimesToTick: 10
 --- !u!1 &436652324
 GameObject:
   m_ObjectHideFlags: 0

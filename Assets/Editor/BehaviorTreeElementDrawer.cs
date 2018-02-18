@@ -51,18 +51,6 @@ public class BehaviorTreeElementDrawer : PropertyDrawer
 
         EditorGUI.LabelField(nameRect, "Name: " + prop.FindPropertyRelative("_Name").stringValue, style);
 
-        EditorGUILayout.Space();
-
-        
-
-        var subs = prop.FindPropertyRelative("_Children");
-        if (subs != null)
-        {
-            EditorGUI.indentLevel += 1;
-            EditorList.Show(subs, EditorListOption.All);
-            EditorGUI.indentLevel -= 1;
-        }
-
         EditorGUI.EndProperty();
     }
 }

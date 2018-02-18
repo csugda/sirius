@@ -19,10 +19,8 @@ namespace Assets.Scripts.AI
         /// Runs all sub-behaviors/trees at the same time using the specified parallelrunner attributes.
         /// </summary>
         public ParallelRunner Runner = new ParallelRunner("Main Root", -1, 0);
-
-        public List<BehaviorTreeElement> BehaviorTreeList;
-
-        public BehaviorTreeAsset BehaviorTree;
+        
+        public List<BehaviorTreeAsset> BehaviorTrees;
 
         public float SecondsBetweenTicks = 0.1f;
 
@@ -42,7 +40,7 @@ namespace Assets.Scripts.AI
 
         public void Init()
         {
-            if(initialized == false)
+            if (initialized == false)
             {
                 initialized = LoadTree();
             }
@@ -62,7 +60,7 @@ namespace Assets.Scripts.AI
 
             Debug.Log("Starting ticks on Runner: \n\t" + Runner.ToString());
             yield return Runner.Tick();
-            while (Runner.CurrentState == BehaviorState.Running || TimesToTick > 0)
+            while (Runner.CurrentState == BehaviorState.Running && TimesToTick > 0)
             {
                 yield return StartCoroutine(Runner.Tick(wfs));
                 --TimesToTick;
@@ -78,46 +76,29 @@ namespace Assets.Scripts.AI
             {
                 BehaviorTreeManager = this
             };
-            if (BehaviorTree != null)
+            if (BehaviorTrees != null)
             {
                 var newList = new List<BehaviorTreeElement>();
-                foreach(var behavior in BehaviorTree.treeElements)
+                foreach(var behaviorAsset in BehaviorTrees)
                 {
-                    var newBehavior = Activator.CreateInstance(Type.GetType(behavior.ElementType), 
-                                                               behavior.name, behavior.depth, behavior.id);
+                    foreach (var behavior in behaviorAsset.treeElements)
+                    {
+                        if (behavior.depth == -1 || behavior.name == "root") continue;
 
-                    if (((BehaviorTreeElement)newBehavior).depth == -1 || ((BehaviorTreeElement)newBehavior).name == "root") continue;
+                        var newBehavior = Activator.CreateInstance(Type.GetType(behavior.ElementType),
+                                                                   behavior.name, behavior.depth, behavior.id);
 
-                    ((BehaviorTreeElement)newBehavior).BehaviorTreeManager = this;
+                        ((BehaviorTreeElement)newBehavior).BehaviorTreeManager = this;
 
-                    newList.Add(newBehavior as BehaviorTreeElement);
+                        newList.Add(newBehavior as BehaviorTreeElement);
+                    }
                 }
                 newList.Insert(0, Runner);
                 Runner = TreeElementUtility.ListToTree(newList) as ParallelRunner;
-                Debug.Log(Runner);
                 //LOAD TREE
                 return true;
             }
-            else
-            {
-                //TEST TREE
-                //This will act as the treeModel's root element. It will be hidden in the treeview.
-                var selector = new Selector("Selector 1", 0, 1);
-                var debugNode = new DebugOutNode("parallel", 0, 5);
-                var meowNode = new DebugOutNode("meow", 1, 2);
-                var inverter = new Inverter("inverter", 1, 3);
-                var invertedNode = new DebugOutNode("invertedShouldFail", 2, 4);
-
-                Runner.AddChild(selector);
-                selector.AddChild(inverter);
-                inverter.SetChild(invertedNode);
-
-                selector.AddChild(meowNode);
-
-                Runner.AddChild(debugNode);
-            }
-
-            return true;
+            else return false;
         }
     }
 }
