@@ -48,14 +48,14 @@ MonoBehaviour:
     ElementType: Assets.Scripts.AI.Components.Selector
     BehaviorTreeManager: {fileID: 0}
     _CurrentState: 0
-  - _ID: 6
-    _Name: DebugOutNode 6
+  - _ID: 2
+    _Name: DebugOutNode 2
     _Depth: 3
     ElementType: Assets.Scripts.AI.Nodes.DebugOutNode
     BehaviorTreeManager: {fileID: 0}
     _CurrentState: 0
-  - _ID: 2
-    _Name: DebugOutNode 2
+  - _ID: 6
+    _Name: DebugOutNode 6
     _Depth: 3
     ElementType: Assets.Scripts.AI.Nodes.DebugOutNode
     BehaviorTreeManager: {fileID: 0}

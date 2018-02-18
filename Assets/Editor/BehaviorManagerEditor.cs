@@ -32,6 +32,7 @@ public class BehaviorManagerEditor : Editor
             var btrees = ((BehaviorManager)serializedObject.targetObject).BehaviorTrees;
             if (btrees == null || btrees.Count <= 0)
             {
+
                 if (GUILayout.Button("Create New Tree"))
                 {
                     CustomAssetUtility.CreateAsset<BehaviorTreeAsset>();
