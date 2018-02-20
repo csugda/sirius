@@ -38,39 +38,9 @@ public class ForcePush : MonoBehaviour {
 
     void push()
     {
-        
         //Show Effect
         Instantiate(pushEffect, transform.position, transform.rotation);
-        try
-        {
-           //GameObject.Find("PlasmaExplosionEffect(Clone)").layer = ;
-
-        }
-        catch (System.Exception)
-        {
-
-            throw;
-        }
-
-        //stop effect
-        //float effectDuration = 2.00f;
-        //while (effectDuration > 0)
-        //{
-        //    effectDuration -= Time.deltaTime;
-        //    if (effectDuration <= 0)
-        //    {
-        //        try
-        //        {
-        //            //Destroy(GameObject.Find("PlasmaExplosionEffect(Clone)"));
-        //        }
-        //        catch (System.Exception)
-        //        {
-
-        //            throw;
-        //        }
-        //    }
-        //}
-
+        
         //Get nearby objects
         Collider2D[] nearbyColliders= Physics2D.OverlapCircleAll(transform.position, radius);
 
