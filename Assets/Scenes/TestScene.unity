@@ -1729,7 +1729,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9faf9baebbb7765418da5042b70eeccc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coolDown: 3
+  coolDown: 0
   radius: 5
   force: {x: 1, y: 1}
   damage: 0
@@ -2312,7 +2312,7 @@ MonoBehaviour:
   - {fileID: 21300014, guid: 08f0c13651bcad146bd4b6110a3cc333, type: 3}
   restingCycle:
   - {fileID: 21300000, guid: 65e4c53001af8c14e9e7b5ab9c380315, type: 3}
-  frameTime: 0.06
+  frameTime: 0.07
 --- !u!1 &1277552279
 GameObject:
   m_ObjectHideFlags: 0
