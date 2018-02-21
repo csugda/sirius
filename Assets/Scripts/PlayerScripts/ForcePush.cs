@@ -52,6 +52,7 @@ public class ForcePush : MonoBehaviour {
                 //Add force
                 rb.AddForce(force, ForceMode2D.Impulse);
                 //Do damage(?)
+                Events.HitEnemy.Invoke(damage);
             }
         }
     }
