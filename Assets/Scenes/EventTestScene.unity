@@ -1787,7 +1787,7 @@ MonoBehaviour:
   coolDown: 0
   radius: 5
   force: {x: 1, y: 1}
-  damage: 3
+  damage: 2
   pushEffect: {fileID: 100000, guid: 049869b625f05794a9357f0e5468093f, type: 2}
 --- !u!50 &943668027
 Rigidbody2D:
@@ -1822,6 +1822,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 0
   maxHealth: 0
+  collisionDamage: 0
 --- !u!1 &1080835409
 GameObject:
   m_ObjectHideFlags: 0
