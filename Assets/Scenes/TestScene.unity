@@ -1652,6 +1652,7 @@ GameObject:
   - component: {fileID: 943668027}
   - component: {fileID: 943668024}
   - component: {fileID: 943668023}
+  - component: {fileID: 943668028}
   - component: {fileID: 943668026}
   m_Layer: 0
   m_Name: Player
@@ -1729,7 +1730,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9faf9baebbb7765418da5042b70eeccc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coolDown: 0
+  image: {fileID: 0}
+  cooldown: 0
+  initialCooldown: 0
   radius: 5
   force: {x: 1, y: 1}
   damage: 0
@@ -1754,6 +1757,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &943668028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 943668022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d792010b917ba748b5b87ac020148f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actions:
+  - {fileID: 943668026}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &1080835409
 GameObject:
   m_ObjectHideFlags: 0
