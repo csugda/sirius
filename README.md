@@ -1,5 +1,5 @@
 # Project Sirius
-![alt text](https://travis-ci.org/csugda/sirius.svg?branch=master "Travis CI")
+![TravisCI badge](https://travis-ci.org/csugda/sirius.svg?branch=master "TravisCI build status")
 
 ##### CSU Game Developers Association - Spring 2018 project
 
