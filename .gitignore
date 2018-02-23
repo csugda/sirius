@@ -35,3 +35,6 @@ sysinfo.txt
 
 # Desktop store for Mac
 .DS_Store
+
+# Project Version file
+/ProjectSettings/ProjectVersion.txt
