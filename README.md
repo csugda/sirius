@@ -1,14 +1,10 @@
 # Project Sirius
 ![alt text](https://travis-ci.org/csugda/sirius.svg?branch=master "Travis CI")
 
-CSU Game Developers Association - Spring 2018 project
+##### CSU Game Developers Association - Spring 2018 project
 
 ## Installation
 - Install Unity version 2017.3.x
-
-Navigate to the "Plugins" screen of Grafana, then to the "Apps" section. Choose
-to enable the Monasca app, and select the datasource you would like to use as
-a means of accessing the monasca-api service.
 
 ## Build
 
