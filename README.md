@@ -1,7 +1,7 @@
 # Project Sirius
 ![TravisCI badge](https://travis-ci.org/csugda/sirius.svg?branch=master "TravisCI build status")
 
-##### CSU Game Developers Association - Spring 2018 project
+#### CSU Game Developers Association - Spring 2018 project
 
 ## Installation
 - Install Unity version 2017.3.x
