@@ -5,9 +5,11 @@ using UnityEngine;
 public class SuicideTimer : MonoBehaviour {
     // class variables
     public float lifeTime;
+    public float xAdjust;
+    public float yAdjust;
     private void Start()
     {
-        transform.position = new Vector2(GameObject.Find("Player").transform.position.x, GameObject.Find("Player").transform.position.y + 1);
+        transform.position = new Vector2(GameObject.Find("Player").transform.position.x + xAdjust, GameObject.Find("Player").transform.position.y + yAdjust);
     }
     // Update is called once per frame
     void Update () {

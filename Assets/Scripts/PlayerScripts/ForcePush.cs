@@ -16,7 +16,7 @@ namespace Assets.Scripts.Actions
 
         //float coolDownTimer;
         //bool onCooldown = false;
-        // Use this for initialization
+        // Use this for initializationu
         //void Start()
         //{
         //    coolDownTimer = coolDown;
