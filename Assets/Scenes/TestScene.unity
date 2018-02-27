@@ -1150,7 +1150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be2688e09f072094085d35ae7e628c33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 1
+  duration: 0.3
 --- !u!114 &2078582608
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1174,3 +1174,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b73515e781203a46a2e3c48519b1638, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  xAdjust: 0.7
+  yAdjust: 0.968
