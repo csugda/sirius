@@ -10,7 +10,8 @@ public class AttackTrigger : MonoBehaviour {
     {
         if (!collision.isTrigger && collision.CompareTag("Enemy"))
         {
-            //FIXME do damage.        
+            //FIXME do damage.      
+            Debug.Log("hit");
         }
     }
 }
