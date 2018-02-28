@@ -1,9 +1,10 @@
 fileFormatVersion: 2
 guid: 65e4c53001af8c14e9e7b5ab9c380315
-timeCreated: 1519070346
+timeCreated: 1519268425
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: snowsprite_0
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -31,7 +32,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
+    filterMode: 0
     aniso: -1
     mipBias: -1
     wrapU: 1
@@ -44,9 +45,9 @@ TextureImporter:
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 7
-  spritePivot: {x: 0.5, y: 0.5}
-  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spritePixelsToUnits: 100
+  spritePivot: {x: 0.5, y: 0}
+  spriteBorder: {x: 32, y: 35, z: 54, w: 27}
+  spritePixelsToUnits: 370
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -60,22 +61,20 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
-    androidETC2FallbackOverride: 0
   - buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
-    androidETC2FallbackOverride: 0
   - buildTarget: iPhone
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -85,7 +84,6 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
-    androidETC2FallbackOverride: 0
   - buildTarget: Windows Store Apps
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -95,11 +93,67 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
-    androidETC2FallbackOverride: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
-    outline: []
+    sprites:
+    - serializedVersion: 2
+      name: snowsprite_0
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 35
+        width: 423
+        height: 551
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 11, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    outline:
+    - - {x: 48, y: -147.5}
+      - {x: 66, y: -105.5}
+      - {x: 59, y: -17.5}
+      - {x: 90, y: 2.5}
+      - {x: 108, y: 71.5}
+      - {x: 120, y: 30.5}
+      - {x: 130, y: 24.5}
+      - {x: 185, y: 71.5}
+      - {x: 201, y: 95.5}
+      - {x: 201, y: 112.5}
+      - {x: 163, y: 120.5}
+      - {x: 134, y: 160.5}
+      - {x: 120, y: 162.5}
+      - {x: 72, y: 111.5}
+      - {x: 62, y: 100.5}
+      - {x: 57, y: 146.5}
+      - {x: 68, y: 195.5}
+      - {x: 56, y: 258.5}
+      - {x: 35, y: 271.5}
+      - {x: -32, y: 280.5}
+      - {x: -75, y: 280.5}
+      - {x: -77, y: 277.5}
+      - {x: -82, y: 227.5}
+      - {x: -72, y: 182.5}
+      - {x: -133, y: 72.5}
+      - {x: -174, y: -5.5}
+      - {x: -222, y: -63.5}
+      - {x: -217, y: -72.5}
+      - {x: -223, y: -114.5}
+      - {x: -223, y: -133.5}
+      - {x: -215, y: -136.5}
+      - {x: -175, y: -126.5}
+      - {x: -166, y: -154.5}
+      - {x: -153, y: -147.5}
+      - {x: -97, y: -103.5}
+      - {x: -94, y: -142.5}
+      - {x: -108, y: -173.5}
+      - {x: -116, y: -264.5}
+      - {x: -102, y: -274.5}
+      - {x: 16, y: -274.5}
+      - {x: 48, y: -271.5}
+      - {x: 62, y: -252.5}
+      - {x: -4, y: -221.5}
     physicsShape: []
   spritePackingTag: 
   userData: 

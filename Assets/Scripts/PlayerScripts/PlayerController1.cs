@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class PlayerController1 : MonoBehaviour
 {
+    private Animator anim;
     private Transform player;
     private BoxCollider2D playerCollider;
     public Vector3 velocity;
     // Use this for initialization
     void Start()
     {
+        anim = GetComponent<Animator>();
         player = this.gameObject.transform;
         playerCollider = this.gameObject.GetComponent<BoxCollider2D>();
         velocity = new Vector3(0, 0, 0);
@@ -22,18 +24,25 @@ public class PlayerController1 : MonoBehaviour
     public bool down = false;
     private bool canDoubleJump = true;
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         if (Input.GetKey(KeyCode.LeftArrow))
         {
+            anim.SetBool("isMoving", true);
+            anim.SetFloat("faceL", 1);
+            anim.SetFloat("moveL", 1);
             velocity.x = -speed;
         }
         else if (Input.GetKey(KeyCode.RightArrow))
         {
+            anim.SetBool("isMoving", true);
+            anim.SetFloat("faceL", 0);
+            anim.SetFloat("moveL", 0);
             velocity.x = speed;
         }
         else
         {
+            anim.SetBool("isMoving", false);
             velocity.x = 0;
         }
 
