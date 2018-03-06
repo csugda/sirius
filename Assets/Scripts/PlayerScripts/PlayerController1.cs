@@ -7,25 +7,32 @@ public class PlayerController1 : MonoBehaviour
     private Animator anim;
     private Transform player;
     private BoxCollider2D playerCollider;
+    private Rigidbody2D playerRigidbody;
     public Vector3 velocity;
+    private ContactFilter2D floor;
     // Use this for initialization
     void Start()
     {
-        anim = GetComponent<Animator>();
+        floor.SetLayerMask(LayerMask.GetMask("Floor"));
+        floor.useLayerMask = true;
+        anim = this.gameObject.GetComponent<Animator>();
         player = this.gameObject.transform;
         playerCollider = this.gameObject.GetComponent<BoxCollider2D>();
+        playerRigidbody = this.gameObject.GetComponent<Rigidbody2D>();
         velocity = new Vector3(0, 0, 0);
     }
 
     public float speed;
     public float gravity;
     public float jumpPower;
-    //public float maxDownSpeed;
-    public bool down = false;
+    public float groundFallVelocity;
+    public int maxDownSpeed;
+    private bool down = false;
     private bool canDoubleJump = true;
     // Update is called once per frame
     void Update()
     {
+        down = playerCollider.IsTouching(floor);
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             anim.SetBool("isMoving", true);
@@ -46,6 +53,7 @@ public class PlayerController1 : MonoBehaviour
             velocity.x = 0;
         }
 
+        //in the air, gravity in effect
         if (!down)
         {
             velocity.y -= gravity * Time.deltaTime;
@@ -66,30 +74,12 @@ public class PlayerController1 : MonoBehaviour
             }
         }
 
-        player.GetComponent<Rigidbody2D>().MovePosition(player.position + (velocity * Time.deltaTime));
-
-        //player.SetPositionAndRotation(player.position + ( velocity*Time.deltaTime), player.rotation);
+        playerRigidbody.MovePosition(player.position + (velocity * Time.deltaTime));
     }
-    public float groundFallVelocity;
-    public int touching = 0;
-    public int maxDownSpeed;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        touching++;
-        //Debug.Log("hit");
-        if (velocity.y < 0)
-        {
-            down = true;
-        }
-        velocity.y = groundFallVelocity;// * Time.deltaTime;
-    }
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        touching--;
-        if (touching == 0)
-        {
-            down = false;
-        }
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Floor"))
+            velocity.y = groundFallVelocity;
     }
 }
