@@ -10,7 +10,11 @@ namespace Assets.Scripts.Experience
 
         public void Start()
         {
-            
+            Events.XPDrop.AddListener(XPChange);
+        }
+        public void XPChange(int amount)
+        {
+            currentXP += amount;
         }
         public void OnEnable()
         {
