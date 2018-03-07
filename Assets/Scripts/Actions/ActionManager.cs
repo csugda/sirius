@@ -28,15 +28,15 @@ namespace Assets.Scripts.Actions
             {
                 ExecuteAction(0);
             }
-            if (Input.GetKey(KeyCode.S))
+            if (Input.GetKeyDown(KeyCode.S))
             {
                 ExecuteAction(1);
             }
-            if (Input.GetKey(KeyCode.D))
+            if (Input.GetKeyDown(KeyCode.D))
             {
                 ExecuteAction(2);
             }
-            if (Input.GetKey(KeyCode.F))
+            if (Input.GetKeyDown(KeyCode.F))
             {
                 ExecuteAction(3);
             }

@@ -12,7 +12,7 @@ namespace Assets.Scripts.Actions
         public Collider2D attackTrigger;
         private Animator anim;
 
-        private void Awake()
+        private void Start()
         {
             anim = this.gameObject.GetComponent<Animator>();
             anim.SetBool("isAttacking", false);
@@ -21,11 +21,16 @@ namespace Assets.Scripts.Actions
 
         public override void DoAction()
         {
-                anim = this.gameObject.GetComponent<Animator>();
-                base.DoAction();
-                anim.SetBool("isAttacking", true);
-                attackTrigger.enabled = true;        
-            }
+            anim.SetTrigger("Attack");
+
+            base.DoAction();
+            attackTrigger.enabled = true;
+        }
+
+        public void stopAnim()
+        {
+            anim.SetBool("isAttacking", false);
         }
     }
+}
 
