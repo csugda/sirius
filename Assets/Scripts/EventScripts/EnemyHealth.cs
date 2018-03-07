@@ -10,7 +10,6 @@ public class EnemyHealth : MonoBehaviour {
 
     void Start () {
         Events.HitEnemy.AddListener(takeDamage);
-        maxHealth = 3;
         currentHealth = maxHealth;
         
     }
