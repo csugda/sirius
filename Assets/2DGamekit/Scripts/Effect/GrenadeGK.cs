@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Gamekit2D
 {
-    public class Grenade : MonoBehaviour
+    public class GrenadeGK : MonoBehaviour
     {
         public Vector2 initialForce;
         public float timer = 1;

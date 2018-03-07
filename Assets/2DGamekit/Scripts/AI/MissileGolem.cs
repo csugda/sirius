@@ -31,7 +31,7 @@ public class MissileGolem : MonoBehaviour
 
     public GameObject shield, beamLaser;
     public GunnerProjectile projectile;
-    public Grenade grenade;
+    public GrenadeGK grenade;
     public GameObject lightning;
     public Damageable damageable;
     public float lightningTime = 1;
