@@ -15,7 +15,6 @@ namespace Assets.Scripts.Actions
         private void Start()
         {
             anim = this.gameObject.GetComponent<Animator>();
-            anim.SetBool("isAttacking", false);
             attackTrigger.enabled = false;
         }
 
@@ -25,11 +24,6 @@ namespace Assets.Scripts.Actions
 
             base.DoAction();
             attackTrigger.enabled = true;
-        }
-
-        public void stopAnim()
-        {
-            anim.SetBool("isAttacking", false);
         }
     }
 }
