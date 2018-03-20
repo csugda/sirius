@@ -802,6 +802,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteFaceLeft: 0
+  player: {fileID: 943668025}
   speed: 1
   gravity: 10
   projectilePrefab: {fileID: 0}

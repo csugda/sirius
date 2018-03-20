@@ -19,6 +19,8 @@ namespace Gamekit2D
         [Tooltip("If the sprite face left on the spritesheet, enable this. Otherwise, leave disabled")]
         public bool spriteFaceLeft = false;
 
+        public Transform player;
+
         [Header("Movement")]
         public float speed;
         public float gravity = 10.0f;
@@ -98,7 +100,7 @@ namespace Gamekit2D
         protected readonly int m_HashHitPara = Animator.StringToHash("Hit");
         protected readonly int m_HashDeathPara = Animator.StringToHash("Death");
         protected readonly int m_HashGroundedPara = Animator.StringToHash("Grounded");
-
+        
         private void Awake()
         {
             m_CharacterController2D = GetComponent<CharacterController2D>();
@@ -233,11 +235,13 @@ namespace Gamekit2D
         public void ScanForPlayer()
         {
             //If the player don't have control, they can't react, so do not pursue them
+            /*
             if (!PlayerInput.Instance.HaveControl)
                 return;
+            */
 
-            Vector3 dir = PlayerCharacter.PlayerInstance.transform.position - transform.position;
-
+            //Vector3 dir = PlayerCharacter.PlayerInstance.transform.position - transform.position;
+            Vector3 dir = player.position - transform.position;
             if (dir.sqrMagnitude > viewDistance * viewDistance)
             {
                 return;
@@ -252,7 +256,8 @@ namespace Gamekit2D
                 return;
             }
 
-            m_Target = PlayerCharacter.PlayerInstance.transform;
+            //m_Target = PlayerCharacter.PlayerInstance.transform;
+            m_Target = player;
             m_TimeSinceLastTargetView = timeBeforeTargetLost;
 
             m_Animator.SetTrigger(m_HashSpottedPara);
