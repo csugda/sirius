@@ -10,10 +10,13 @@ public class PlayerController1 : MonoBehaviour
     private Rigidbody2D playerRigidbody;
     public Vector3 velocity;
     private ContactFilter2D floor;
+    private ContactFilter2D platform;
     // Use this for initialization
     void Start()
     {
         floor.SetLayerMask(LayerMask.GetMask("Floor"));
+        floor.useLayerMask = true;
+        floor.SetLayerMask(LayerMask.GetMask("Platform"));
         floor.useLayerMask = true;
         anim = this.gameObject.GetComponent<Animator>();
         player = this.gameObject.transform;
@@ -32,7 +35,7 @@ public class PlayerController1 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        down = playerCollider.IsTouching(floor);
+        down = playerCollider.IsTouching(floor) || playerCollider.IsTouching(platform);
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             anim.SetBool("isMoving", true);

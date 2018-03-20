@@ -17,10 +17,10 @@ TagManager:
   - 
   - 
   - Floor
-  - 
-  - 
-  - 
-  - 
+  - Enemy
+  - Enemy Floor
+  - Player
+  - Platform
   - 
   - 
   - 
