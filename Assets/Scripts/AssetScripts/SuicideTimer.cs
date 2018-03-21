@@ -9,7 +9,10 @@ public class SuicideTimer : MonoBehaviour {
     public float yAdjust;
     private void Start()
     {
-        transform.position = new Vector2(GameObject.Find("Player").transform.position.x + xAdjust, GameObject.Find("Player").transform.position.y + yAdjust);
+        if (GameObject.Find("Player"))
+        {
+            transform.position = new Vector2(GameObject.Find("Player").transform.position.x + xAdjust, GameObject.Find("Player").transform.position.y + yAdjust);
+        }
     }
     // Update is called once per frame
     void Update () {
