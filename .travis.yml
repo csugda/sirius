@@ -8,4 +8,7 @@ before_install:
 install:
 - ./install.sh
 script:
-- travis_wait ./build.sh
+- ./build.sh
+notifications:
+  email: false
+  slack: csugda:eHhYEHbXYLch9ERRRmGXwoM6
