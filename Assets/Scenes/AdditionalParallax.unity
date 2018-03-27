@@ -558,7 +558,7 @@ MonoBehaviour:
   scrolling: 1
   parallax: 1
   backgroundSize: 20
-  paralaxSpeed: 0.9
+  paralaxSpeed: 0.3
 --- !u!1 &674114070
 GameObject:
   m_ObjectHideFlags: 0
