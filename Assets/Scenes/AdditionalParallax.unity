@@ -527,7 +527,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &667781443
 Transform:
   m_ObjectHideFlags: 0
@@ -1343,7 +1343,7 @@ MonoBehaviour:
   scrolling: 0
   parallax: 1
   backgroundSize: 24.36
-  paralaxSpeed: 0.9
+  paralaxSpeed: 0.8
 --- !u!1 &1868900334
 GameObject:
   m_ObjectHideFlags: 0
@@ -1432,7 +1432,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1946567224
 Transform:
   m_ObjectHideFlags: 0
