@@ -10,19 +10,21 @@ namespace Assets.Scripts.Actions
     {
         //class variables
         public Collider2D attackTrigger;
-        
-        
+        private Animator anim;
 
-        private void Awake()
-        { 
+        private void Start()
+        {
+            anim = this.gameObject.GetComponent<Animator>();
             attackTrigger.enabled = false;
         }
 
         public override void DoAction()
         {
-                base.DoAction();
-                attackTrigger.enabled = true;        
-            }
+            anim.SetTrigger("Attack");
+
+            base.DoAction();
+            attackTrigger.enabled = true;
         }
     }
+}
 
