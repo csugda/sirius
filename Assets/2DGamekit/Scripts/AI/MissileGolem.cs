@@ -31,7 +31,7 @@ public class MissileGolem : MonoBehaviour
 
     public GameObject shield, beamLaser;
     public GunnerProjectile projectile;
-    public Grenade grenade;
+    public GrenadeGK grenadeGK;
     public GameObject lightning;
     public Damageable damageable;
     public float lightningTime = 1;
@@ -221,7 +221,7 @@ public class MissileGolem : MonoBehaviour
     {
         grenadeThrowAudioPlayer.PlayRandomSound();
 
-        var p = Instantiate(grenade);
+        var p = Instantiate(grenadeGK);
         p.transform.position = grenadeSpawnPoint.position;
         p.initialForce = grenadeLaunchVelocity;
     }

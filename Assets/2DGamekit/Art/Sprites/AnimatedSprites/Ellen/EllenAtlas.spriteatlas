@@ -32,12 +32,6 @@ SpriteAtlas:
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
-  - {fileID: 21300000, guid: 7dc53b10e29bfcc48adc614d32ce06fe, type: 3}
-  - {fileID: 21300000, guid: 198757141805bb0438680788a437e6e8, type: 3}
-  - {fileID: 21300000, guid: bab644ce1ecde4c4d960a4b153e205d5, type: 3}
-  - {fileID: 21300000, guid: 648c9904e38101042bd1aa753448c6b4, type: 3}
-  - {fileID: 21300000, guid: a2ef328987c90424295b653eb3751c65, type: 3}
-  - {fileID: 21300000, guid: 4b035d61d25494f40a0286cee852bcd4, type: 3}
   - {fileID: 21300000, guid: c66090fb301d69046ba811b94979feab, type: 3}
   - {fileID: 21300000, guid: aa9e3d4d344a1c548a75a061ab69c3fb, type: 3}
   - {fileID: 21300000, guid: 5b1c7342d6504e3448979307c3f6a639, type: 3}
@@ -239,12 +233,6 @@ SpriteAtlas:
   - {fileID: 21300000, guid: b5a42cffd70ab6441a230c8e772f3c56, type: 3}
   - {fileID: 21300000, guid: 35322bfa3901c9145821274537244b1d, type: 3}
   m_PackedSpriteNamesToIndex:
-  - Anim_StaffAttack_Type2_00013
-  - Anim_StaffAttack_Type2_00011
-  - Anim_StaffAttack_Type2_00005
-  - Anim_StaffAttack_Type2_00007
-  - Anim_StaffAttack_Type2_00003
-  - Anim_StaffAttack_Type2_00009
   - Anim_StaffAttack_Type1_00009
   - Anim_StaffAttack_Type1_00003
   - Anim_StaffAttack_Type1_00007
