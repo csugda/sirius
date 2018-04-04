@@ -19,7 +19,7 @@ namespace Assets.Scripts.Actions
                 throw new Exception("Action must be between 1 and 4");
             if (actions[action] == null)
                 return false;
-            return (actions[action].cooldown <= 0);
+            return (actions[action].cooldown >= actions[action].initialCooldown);
         }
 
         public void Update()
