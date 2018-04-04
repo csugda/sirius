@@ -558,7 +558,7 @@ MonoBehaviour:
   scrolling: 1
   parallax: 1
   backgroundSize: 20
-  paralaxSpeed: 0.7
+  paralaxSpeed: 0.8
 --- !u!1 &674114070
 GameObject:
   m_ObjectHideFlags: 0
@@ -1343,7 +1343,7 @@ MonoBehaviour:
   scrolling: 0
   parallax: 1
   backgroundSize: 24.36
-  paralaxSpeed: 0.8
+  paralaxSpeed: 0.7
 --- !u!1 &1868900334
 GameObject:
   m_ObjectHideFlags: 0
@@ -1407,7 +1407,7 @@ SpriteRenderer:
   m_SortingLayerID: -1035117849
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: fca6a8d88d47c684ba5c164db0fc21cc, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e72f5339498d7af409c2f0a3f77a7876, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
