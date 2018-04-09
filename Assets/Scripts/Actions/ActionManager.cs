@@ -19,7 +19,7 @@ namespace Assets.Scripts.Actions
                 throw new Exception("Action must be between 1 and 4");
             if (actions[action] == null)
                 return false;
-            return (actions[action].cooldown <= 0);
+            return (actions[action].cooldown >= actions[action].initialCooldown);
         }
 
         public void Update()
@@ -28,15 +28,15 @@ namespace Assets.Scripts.Actions
             {
                 ExecuteAction(0);
             }
-            if (Input.GetKey(KeyCode.S))
+            if (Input.GetKeyDown(KeyCode.S))
             {
                 ExecuteAction(1);
             }
-            if (Input.GetKey(KeyCode.D))
+            if (Input.GetKeyDown(KeyCode.D))
             {
                 ExecuteAction(2);
             }
-            if (Input.GetKey(KeyCode.F))
+            if (Input.GetKeyDown(KeyCode.F))
             {
                 ExecuteAction(3);
             }
