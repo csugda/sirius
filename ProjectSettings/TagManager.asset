@@ -17,9 +17,9 @@ TagManager:
   - 
   - 
   - Floor
-  - 
-  - 
-  - 
+  - Enemy
+  - EnemyFloor
+  - Player
   - 
   - 
   - 
@@ -55,6 +55,9 @@ TagManager:
     locked: 1
   - name: Platforms
     uniqueID: 3240939463
+    locked: 0
+  - name: Enemy
+    uniqueID: 1450868829
     locked: 0
   - name: Player
     uniqueID: 2529698761
