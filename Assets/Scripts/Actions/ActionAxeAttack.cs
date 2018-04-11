@@ -12,8 +12,9 @@ namespace Assets.Scripts.Actions
         public Collider2D attackTrigger;
         private Animator anim;
 
-        private void Start()
+        private new void Start()
         {
+            base.Start();
             anim = this.gameObject.GetComponent<Animator>();
             attackTrigger.enabled = false;
         }
