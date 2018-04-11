@@ -29,7 +29,6 @@ namespace Assets.Scripts.Actions
         {
             colorRamp = colorDiff;
             cooldown = 0;
-            
         }
         public Color temp;
         public void Update()
