@@ -21,6 +21,7 @@ namespace Assets.Scripts.Actions
                 initialCooldown = 0.1f;
             }
             UiImage = UI.GetComponent<Image>();
+            UiImage.sprite = image;
             Debug.Log(this.gameObject.name);
             Debug.Log(UiImage);
             colorDiff = new Vector3(useColor.r, useColor.g, useColor.b);
@@ -29,7 +30,6 @@ namespace Assets.Scripts.Actions
         {
             colorRamp = colorDiff;
             cooldown = 0;
-            
         }
         public Color temp;
         public void Update()

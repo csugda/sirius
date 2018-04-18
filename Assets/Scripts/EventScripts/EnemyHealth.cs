@@ -23,5 +23,9 @@ public class EnemyHealth : MonoBehaviour {
     private void takeDamage(float damage)
     {
         currentHealth = currentHealth - damage;
+        if (currentHealth <= 0)
+        {
+            Destroy(this.gameObject);
+        }
     }
 }
