@@ -56,8 +56,8 @@ public class Pride : MonoBehaviour
     bool inRange = false;
     int round = 0;
 
-    private int m_TotalHealth = 0;
-    private int m_CurrentHealth = 0;
+    private int m_TotalHealth = 100;
+    public int m_CurrentHealth = 100;
 
     //used to track target movement, to correct for it.
     private Vector2 m_PreviousTargetPosition;
@@ -82,25 +82,21 @@ public class Pride : MonoBehaviour
             //First Round
             BT.Repeat(rounds.Length).OpenBranch(
                 
-                BT.While(Test).OpenBranch(
-                    BT.RandomSequence(new int[] { 1, 6, 4 }).OpenBranch(
+                BT.While(Alive).OpenBranch(
+                    BT.RandomSequence(new int[] { 6, 4, 2 }).OpenBranch(
                         BT.Root().OpenBranch(
-                            BT.Call(PrintWalk),
-                            BT.Wait(delay)
-                        ),
-                        BT.If(TargetInRange).OpenBranch(
-                            BT.Call(PrintInRange),
                             BT.Repeat(strikeCount).OpenBranch(
-                                BT.Call(PrintPunch),
                                 BT.Wait(punchDelay),
                                 BT.Call(Punch),
                                 BT.Wait(delay)
                             )
                         ),
-                        BT.If(TargetOutOfRange).OpenBranch(
-                            BT.Call(PrintThrow),
-                            BT.Wait(throwDelay),
-                            BT.Call(ThrowObject),
+                        BT.If(SecondPhase).OpenBranch(
+                            BT.Call(AOE),
+                            BT.Wait(delay)
+                        ),
+                        BT.If(ThirdPhase).OpenBranch(
+                            BT.Call(UltimateAttack),
                             BT.Wait(delay)
                         )
                     )
@@ -140,39 +136,36 @@ public class Pride : MonoBehaviour
         BackgroundMusicPlayer.Instance.PushClip(playerDeathClip);
     }
 
-    bool Test()
+    bool Alive()
     {
-        return true;
+        return m_CurrentHealth > 0;
+    }
+
+    bool SecondPhase()
+    {
+        return m_CurrentHealth / m_TotalHealth < 0.66;
+    }
+
+    bool ThirdPhase()
+    {
+        return m_CurrentHealth / m_TotalHealth < 0.33;
     }
 
     void Punch()
     {
         //punchAudioPlayer.PlayRandomSound();
+        Debug.Log(Time.realtimeSinceStartup + " : Pride will now Punch.");
     }
 
-    void ThrowObject()
+    void AOE()
     {
         //throwAudioPlayer.PlayRandomSound();
+        Debug.Log(Time.realtimeSinceStartup + " : Pride will now perform AOE attack.");
     }
 
-    void PrintWalk()
+    void UltimateAttack()
     {
-        Debug.Log(Time.realtimeSinceStartup + " : Pride will now Walk.");
-    }
-
-    void PrintInRange()
-    {
-        Debug.Log(Time.realtimeSinceStartup + " : Target is in range");
-    }
-
-    void PrintPunch()
-    {
-        Debug.Log(Time.realtimeSinceStartup + " : Pride will now Punch " + strikeCount + " times");
-    }
-
-    void PrintThrow()
-    {
-        Debug.Log(Time.realtimeSinceStartup + " : Target is not in range. Pride will now Throw an object.");
+        Debug.Log(Time.realtimeSinceStartup + " : Pride will now perform Ultimate attack.");
     }
 
     private void FixedUpdate()
