@@ -42,6 +42,7 @@ namespace Assets.Scripts.Actions
 
         public override void DoAction()
         {
+         
             base.DoAction();
 
             //Show Effect
@@ -62,5 +63,9 @@ namespace Assets.Scripts.Actions
                 }
             }
         }
+
+
+
+    
     }
 }

@@ -8,8 +8,10 @@ namespace Assets.Scripts.Actions
 
         public void ExecuteAction(int action)
         {
+            //Debug.Log("execute " + action + " can execute: " + CanExecuteAction(action));
             if (CanExecuteAction(action))
             {
+
                 actions[action].DoAction();
             }
         }

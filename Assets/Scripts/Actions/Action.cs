@@ -41,7 +41,7 @@ namespace Assets.Scripts.Actions
                 UiImage.color = temp;
                 colorRamp = Vector3.Lerp(colorDiff, white, (cooldown / initialCooldown) );
                 cooldown += Time.deltaTime;
-                Debug.Log(colorRamp);
+
             }
         }
     }
