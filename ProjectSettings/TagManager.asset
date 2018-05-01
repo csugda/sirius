@@ -56,6 +56,9 @@ TagManager:
   - name: MidGroundClose
     uniqueID: 1971486109
     locked: 0
+  - name: Haze
+    uniqueID: 1704428655
+    locked: 0
   - name: Foreground
     uniqueID: 1056803649
     locked: 1
