@@ -7,7 +7,7 @@ using UnityEngine.Events;
 [System.Serializable]
 public class HitEnemyEvent : UnityEvent<float> { }
 [System.Serializable]
-public class HitPlayerEvent : UnityEvent<float> { }
+public class HitPlayerEvent : UnityEvent<int> { }
 [System.Serializable]
 public class PlayerExperienceEvent : UnityEvent<int> { }
 public class Events : MonoBehaviour {
