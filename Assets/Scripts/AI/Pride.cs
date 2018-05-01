@@ -23,7 +23,7 @@ public class Pride : MonoBehaviour
     public float viewDistance = 10.0f;
     public int strikeCount = 2;
     public float trackingSpeed = 30.0f;
-    public float delay = 2;
+    public float delay = 4;
     public float punchDelay, throwDelay, cleanupDelay, deathDelay;
 
     public GameObject Fist;
@@ -81,7 +81,7 @@ public class Pride : MonoBehaviour
         ai.OpenBranch(
             //First Round
             BT.Repeat(rounds.Length).OpenBranch(
-                
+                BT.Wait(delay),
                 BT.While(Alive).OpenBranch(
                     BT.RandomSequence(new int[] { 6, 4, 2 }).OpenBranch(
                         BT.Root().OpenBranch(
@@ -155,6 +155,7 @@ public class Pride : MonoBehaviour
     {
         //punchAudioPlayer.PlayRandomSound();
         Debug.Log(Time.realtimeSinceStartup + " : Pride will now Punch.");
+        animator.SetTrigger("IsChargingPunch");
     }
 
     void AOE()
